@@ -104,8 +104,22 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         alert("Start and End Time must be in the format 'MM-dd-yyyy HH:mm:ss'");
         event.preventDefault();
         return false;
+    } // Convert start and end times to Date objects for comparison
+    var startDate = new Date(startInput.value);
+    var endDate = new Date(endInput.value);
+
+    // Calculate the time difference in milliseconds
+    var timeDifference = endDate - startDate;
+    var daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    // Check if the time interval is more than 7 days
+    if (daysDifference > 7) {
+        alert("Time interval must not be more than 7 days apart");
+        event.preventDefault();
+        return false;
     }
 });
+
 </script>
 
 </body>

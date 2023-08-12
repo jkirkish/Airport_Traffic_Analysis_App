@@ -3,15 +3,13 @@ package com.coderscampus.flightTrack;
 import java.io.IOException;
 import java.net.URI;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 //https://openskynetwork.github.io/opensky-api/rest.html
 public class OpenSkyIntegration {
 	@Test

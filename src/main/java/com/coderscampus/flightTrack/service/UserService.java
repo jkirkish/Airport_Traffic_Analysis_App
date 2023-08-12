@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.coderscampus.flightTrack.domain.Address;
@@ -11,7 +14,7 @@ import com.coderscampus.flightTrack.domain.User;
 import com.coderscampus.flightTrack.repository.UserRepository;
 
 @Service
-public class UserService{
+public class UserService implements UserDetailsService{
 
 	@Autowired
 	private UserRepository userRepo;
@@ -39,7 +42,7 @@ public class UserService{
 
 	public User findById(Long userId) {
 		Optional<User> userOpt = userRepo.findById(userId);
-		return userOpt.orElse(new User());
+		return userOpt.orElse(new User(userId, null, null, null, null, null, null, null, null));
 	}
 
 	public List<User> findAll() {
@@ -48,7 +51,7 @@ public class UserService{
 
 	public User findBydId(Long id) {
 		Optional<User> userOpt = userRepo.findById(id);
-		return userOpt.orElse(new User());
+		return userOpt.orElse(new User(id, null, null, null, null, null, null, null, null));
 	}
 
 	public User saveUser(User user) {
@@ -76,6 +79,14 @@ public class UserService{
 	public void delete(Long userId) {
 		userRepo.deleteById(userId);
 
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		User user = new User(null, username, username, username, username, username, username, null, null);
+		
+		return user;
 	}
 
 	

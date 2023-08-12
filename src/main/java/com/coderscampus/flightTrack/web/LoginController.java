@@ -29,7 +29,7 @@ public class LoginController {
 	}
 	@GetMapping("/login")
 	public String getLoginPage(ModelMap model) {
-		model.put("user", new User());
+		model.put("user", new User(null, null, null, null, null, null, null, null, null));
 		return "login";
 	}
 	@GetMapping("/errorLogin")

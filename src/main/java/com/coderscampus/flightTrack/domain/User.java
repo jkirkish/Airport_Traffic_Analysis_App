@@ -1,20 +1,16 @@
 package com.coderscampus.flightTrack.domain;
 
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
+
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,11 +35,13 @@ public class User implements UserDetails{
 	private String phone;
 	private LocalDate registrationDate;
 	private Address address;
-	
-	
-	
-	
-
+	private Boolean accountNonExpired;
+	private Boolean accountNonLocked;
+	//private Collection<? extends GrantedAuthority> authorities;
+	private Boolean enabled;
+	private Boolean expired;
+	private Collection<? extends GrantedAuthority> authorities;
+    
 	public User(Long id, String username, String password, String firstName, String lastName, String email,
 			String phone, LocalDate registrationDate, Address address) {
 		super();
@@ -56,6 +54,7 @@ public class User implements UserDetails{
 		this.phone = phone;
 		this.registrationDate = registrationDate;
 		this.address = address;
+		
 	}
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
@@ -147,30 +146,42 @@ public class User implements UserDetails{
 		
 		return null;
 	}
+	public void setAuthorities(Collection<? extends GrantedAuthority> priviledges) {
+		this.authorities= priviledges;
+	}
 	@Override
 	public boolean isAccountNonExpired() {
 		
 		return true;
+	}
+	public void setAccountNonExpired(Boolean expired) {
+		
+		this.accountNonExpired = expired;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
 		
 		return true;
 	}
+    public void setAccountNonLocked(Boolean locked) {
+		
+		this.accountNonLocked = locked;
+	}
 	@Override
 	public boolean isCredentialsNonExpired() {
 		
 		return true;
+	}
+	public void setCredentialsNonExpired(Boolean expire) {
+		this.expired = expire;
 	}
 	@Override
 	public boolean isEnabled() {
 		
 		return true;
 	}
-	
-	
-
-	   
-	   
+	public void setEnabled(Boolean enable) {
+		this.enabled = enable;
+	}     
 
 }

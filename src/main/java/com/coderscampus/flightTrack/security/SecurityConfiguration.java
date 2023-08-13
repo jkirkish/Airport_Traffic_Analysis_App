@@ -11,14 +11,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.coderscampus.flightTrack.repository.UserRepository;
 import com.coderscampus.flightTrack.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 	
+	private UserRepository userRepo;
 	
 	
+	public SecurityConfiguration(UserRepository userRepo) {
+		super();
+		this.userRepo = userRepo;
+	}
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -27,7 +34,7 @@ public class SecurityConfiguration {
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new UserService(passwordEncoder());
+		return new UserService(passwordEncoder(),userRepo);
 	}
 	
 	@Bean

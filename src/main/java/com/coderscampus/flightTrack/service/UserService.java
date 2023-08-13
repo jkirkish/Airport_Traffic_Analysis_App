@@ -17,17 +17,17 @@ import com.coderscampus.flightTrack.repository.UserRepository;
 @Service
 public class UserService implements UserDetailsService{
 
-	@Autowired
-	private UserRepository userRepo;
 	
+	private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
     
-	public UserService(PasswordEncoder passwordEncoder) {
+	public UserService(PasswordEncoder passwordEncoder, UserRepository userRepo) {
 		super();
 		this.passwordEncoder = passwordEncoder;
+		this.userRepo = userRepo;
 	}
 
-	public Optional<User> findByUsername(String username) {
+	public User findByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
 
@@ -91,8 +91,9 @@ public class UserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User user = new User(null, username, passwordEncoder.encode("myPassword1"), username, username, username, username, null, null);
+		User user = userRepo.findByUsername(username);
 		
+		if(user == null)throw new UsernameNotFoundException("Bad Credentials"); 
 		return user;
 	}
 

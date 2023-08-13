@@ -3,13 +3,16 @@ package com.coderscampus.flightTrack.domain;
 
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -40,8 +43,10 @@ public class User implements UserDetails{
 	//private Collection<? extends GrantedAuthority> authorities;
 	private Boolean enabled;
 	private Boolean expired;
-	private Collection<? extends GrantedAuthority> authorities;
+	private Set<Role> authorities;
     
+	public User() {}
+	
 	public User(Long id, String username, String password, String firstName, String lastName, String email,
 			String phone, LocalDate registrationDate, Address address) {
 		super();
@@ -142,11 +147,18 @@ public class User implements UserDetails{
 		return Objects.equals(id, other.id);
 	}
 	@Override
+	@ElementCollection(fetch = FetchType.LAZY, targetClass = Role.class)
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+		name="user_role_junction",
+		joinColumns = @JoinColumn(name="user_id"),
+		inverseJoinColumns = @JoinColumn(name="role_id"))
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
-		return null;
+		return this.authorities;
 	}
-	public void setAuthorities(Collection<? extends GrantedAuthority> priviledges) {
+	
+	public void setAuthorities(Set<Role> priviledges) {
 		this.authorities= priviledges;
 	}
 	@Override

@@ -85,31 +85,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
-    function goToArrivalsPage() {
-        window.location.href = "/arrivals";
-    }
-    
-    function deleteArrival() {
-        // Retrieve the arrival ID
-        var arrivalId = document.querySelector('span[data-arrival-id]').innerText;
-
-        // Perform an AJAX request to delete the arrival
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/arrivals/delete/" + arrivalId, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onload = function () {
-            // Handle the response from the server
-            if (xhr.status === 200) {
-                alert("Arrival deleted successfully!");
-                // Redirect to the arrivals page
-                window.location.href = "/arrivals";
-            } else {
-                alert("Failed to delete arrival. Please try again.");
-            }
-        };
-        xhr.send();
-    }
-    </script>
+    <script type="text/javascript" src="/js/arrival.js"></script>
     </body>
     </html>

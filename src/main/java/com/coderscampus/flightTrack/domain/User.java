@@ -40,12 +40,16 @@ public class User implements UserDetails{
 	private Address address;
 	private Boolean accountNonExpired;
 	private Boolean accountNonLocked;
-	//private Collection<? extends GrantedAuthority> authorities;
 	private Boolean enabled;
 	private Boolean expired;
 	private Set<Role> authorities;
     
 	public User() {}
+	
+	public User(String inputUsername, String inputPassword) {
+		this.username = inputUsername;
+		this.password = inputPassword;
+	}
 	
 	public User(Long id, String username, String password, String firstName, String lastName, String email,
 			String phone, LocalDate registrationDate, Address address) {
@@ -147,19 +151,18 @@ public class User implements UserDetails{
 		return Objects.equals(id, other.id);
 	}
 	@Override
-	@ElementCollection(fetch = FetchType.LAZY, targetClass = Role.class)
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 		name="user_role_junction",
 		joinColumns = @JoinColumn(name="user_id"),
 		inverseJoinColumns = @JoinColumn(name="role_id"))
-	public Collection<? extends GrantedAuthority> getAuthorities() {
+	public Set<Role> getAuthorities() {
 		
 		return this.authorities;
 	}
 	
-	public void setAuthorities(Set<Role> priviledges) {
-		this.authorities= priviledges;
+	public void setAuthorities(Set<Role> authorities) {
+		this.authorities= authorities;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

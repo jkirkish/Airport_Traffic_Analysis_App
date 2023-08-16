@@ -19,11 +19,10 @@ public class UserService implements UserDetailsService{
 
 	
 	private UserRepository userRepo;
-    private PasswordEncoder passwordEncoder;
+   
     
-	public UserService(PasswordEncoder passwordEncoder, UserRepository userRepo) {
+	public UserService(UserRepository userRepo) {
 		super();
-		this.passwordEncoder = passwordEncoder;
 		this.userRepo = userRepo;
 	}
 

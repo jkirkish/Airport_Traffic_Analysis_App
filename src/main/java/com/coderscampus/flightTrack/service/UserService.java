@@ -55,11 +55,6 @@ public class UserService implements UserDetailsService{
 		return userRepo.findAll();
 	}
 
-	public User findBydId(Long id) {
-		Optional<User> userOpt = userRepo.findById(id);
-		return userOpt.orElse(new User(id, null, null, null, null, null, null, null, null));
-	}
-
 	public User saveUser(User user) {
 		if (user.getAddress() == null) {
 			Address address = new Address();

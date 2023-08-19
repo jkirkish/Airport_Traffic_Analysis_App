@@ -2,10 +2,15 @@ package com.coderscampus.flightTrack;
 
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -13,18 +18,24 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import com.coderscampus.flightTrack.domain.User;
 import com.coderscampus.flightTrack.service.JwtService;
 
+import io.jsonwebtoken.Claims;
 
 @TestInstance(Lifecycle.PER_CLASS)
+//@SpringBootTest
 class JwtServiceTest {
 
+//    @Autowired
     private JwtService sut;
     
     @BeforeAll
     void init () {
         sut = new JwtService();
+        sut.setExpirationTimeInMillis(300000L);
+        sut.setJwtSigningKey("BB8FB2A6C40E620DECDB7EB2849FB77F7D244E9C0C6AE332755B70B069B65C3F");
     }
     
     @Test
+    @DisplayName("should generate a new JWS token")
     void testGenerateToken() {
         /** 
          * 1. Arrange
@@ -40,7 +51,69 @@ class JwtServiceTest {
         String jwt = sut.generateToken(extraClaims, user);
         
         // Assert
-        System.out.println(jwt);
+        assertTrue(jwt.startsWith("ey"));
+            
+    }
+    
+     @Test
+    @DisplayName("should extract all claims")
+    void testExtractAllClaims () {
+        // Arrange
+        Map<String, Object> extraClaims = new HashMap<>();
+        User user = new User("trevor@coderscampus.com", "abc123");
+        String token = sut.generateToken(extraClaims, user);
+        
+        // Act
+        Claims allClaims = sut.extractAllClaims(token);
+        
+        
+        assertTrue(allClaims.size() >= 3);
+    }
+    
+    @Test
+    @DisplayName("should extract valid subject from claims")
+    void testExtractSubjectClaim () {
+     // Arrange
+        Map<String, Object> extraClaims = new HashMap<>();
+        User user = new User("trevor@coderscampus.com", "abc123");
+        String token = sut.generateToken(extraClaims, user);
+        
+        // Act
+        String subject = sut.getSubject(token);
+        
+        // Assert
+        assertEquals("trevor@coderscampus.com", subject);
+    }
+    
+    @Test
+    @DisplayName("should return a valid token")
+    void testValidToken () {
+     // Arrange
+        Map<String, Object> extraClaims = new HashMap<>();
+        User user = new User("trevor@coderscampus.com", "abc123");
+        String token = sut.generateToken(extraClaims, user);
+        
+        // Act
+        Boolean isValidToken = sut.isValidToken(token, user);
+        
+        // Assert
+        assertTrue(isValidToken);
+    }
+    
+    @Test
+    @DisplayName("should return an invalid token")
+    void testInvalidToken () {
+     // Arrange
+        Map<String, Object> extraClaims = new HashMap<>();
+        User validUser = new User("trevor@coderscampus.com", "abc123");
+        User invalidUser = new User("trevor.page@coderscampus.com", "abc123");
+        String token = sut.generateToken(extraClaims, validUser);
+        
+        // Act
+        Boolean isValidToken = sut.isValidToken(token, invalidUser);
+        
+        // Assert
+        assertFalse(isValidToken);
     }
 
-}
+    }

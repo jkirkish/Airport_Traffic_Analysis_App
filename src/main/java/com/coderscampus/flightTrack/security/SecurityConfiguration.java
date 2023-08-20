@@ -24,7 +24,7 @@ public class SecurityConfiguration {
 	private UserRepository userRepo;
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 	
-	public SecurityConfiguration(UserRepository userRepo) {
+	public SecurityConfiguration(UserRepository userRepo,JwtAuthenticationFilter jwtAuthenticationFilter) {
 		super();
 		this.userRepo = userRepo;
 		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -66,11 +66,8 @@ public class SecurityConfiguration {
 		})
 		.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	    .authenticationProvider(authenticationProvider())
-	    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-		.authenticationProvider(authenticationProvider())
-		.formLogin((form) -> {
-			form.loginPage("/login").permitAll();
-		});
+	    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		
 		
 		return http.build();
 	}

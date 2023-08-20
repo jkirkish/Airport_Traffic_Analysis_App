@@ -16,7 +16,7 @@ public class Address {
 
    
 
-    private Long id;
+    private Integer id;
 	private User user;
     @Column(name = "address_line_1")
     private String addressLine1;
@@ -29,10 +29,10 @@ public class Address {
     private String country;
    
     @Id
-    public Long getUserId() {
+    public Integer getId() {
 		return id;
 	}
-	public void setUserId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

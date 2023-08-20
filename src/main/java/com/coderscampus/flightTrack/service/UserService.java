@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService{
 		return userRepo.findByfirstNameAndUsername(lastName, username);
 	}
 
-	public User findById(Long userId) {
+	public User findById(Integer userId) {
 		Optional<User> userOpt = userRepo.findById(userId);
 		return userOpt.orElse(new User(userId, null, null, null, null, null, null, null, null));
 	}
@@ -65,19 +65,19 @@ public class UserService implements UserDetailsService{
 			address.setState("");
 			address.setZip("");
 			address.setUser(user);
-			address.setUserId((user.getId()));
+			address.setId((user.getId()));
 			user.setAddress(address);
 		} else {
 			Address address = user.getAddress();
 			address.setUser(user);
-			address.setUserId(user.getId());
+			address.setId(user.getId());
 			user.setAddress(user.getAddress());
 		}
 		return userRepo.save(user);
 
 	}
 
-	public void delete(Long userId) {
+	public void delete(Integer userId) {
 		userRepo.deleteById(userId);
 
 	}

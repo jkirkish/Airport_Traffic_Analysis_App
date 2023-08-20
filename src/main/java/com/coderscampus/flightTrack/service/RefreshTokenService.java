@@ -25,14 +25,33 @@ public class RefreshTokenService {
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
-    public RefreshToken generateRefreshToken (Long userId) {
+    public RefreshToken generateRefreshToken (Integer userId) {
         
-        Optional<User> userOpt = Optional.of(userService.findById(userId));
+        Optional<User> userOpt = Optional.ofNullable(userService.findById(userId));
         if (userOpt.isPresent()) {
-            RefreshToken refreshToken = new RefreshToken(userOpt.get(), UUID.randomUUID().toString(), new Date(System.currentTimeMillis() + refreshTokenExpirationTimeInMillis));
+            Optional<RefreshToken> refreshTokenOpt = refreshTokenRepository.findById(userId);
+            
+            RefreshToken refreshToken = null;
+            if (refreshTokenOpt.isPresent()) {
+                refreshToken = refreshTokenOpt.get();
+                refreshToken.setExpirationDate(getRefreshTokenExpirationDate());
+                refreshToken.setRefreshToken(generateRandomTokenValue());
+            } else {
+                refreshToken = new RefreshToken(userOpt.get(), generateRandomTokenValue(), getRefreshTokenExpirationDate());
+            }
+            
             refreshToken = refreshTokenRepository.save(refreshToken);
             return refreshToken;
         }
         return null;
     }
+
+    private String generateRandomTokenValue() {
+        return UUID.randomUUID().toString();
+    }
+
+    private Date getRefreshTokenExpirationDate() {
+        return new Date(System.currentTimeMillis() + refreshTokenExpirationTimeInMillis);
+    }
+    
 }

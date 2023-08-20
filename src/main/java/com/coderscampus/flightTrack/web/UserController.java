@@ -29,7 +29,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/{id}")
-	public String getOneUser (ModelMap model, @PathVariable Long id) {
+	public String getOneUser (ModelMap model, @PathVariable Integer id) {
 		User user = userService.findById(id);
 		model.put("user", user);
 		return "user";
@@ -58,7 +58,7 @@ public class UserController {
 		return "redirect:/users/" + user.getId();
 	}
    @PostMapping("/users/{userId}/delete")
-   public String postDeleteUser(@PathVariable Long userId) {
+   public String postDeleteUser(@PathVariable Integer userId) {
 	   userService.delete(userId);
 	   return "redirect:/users";
    }

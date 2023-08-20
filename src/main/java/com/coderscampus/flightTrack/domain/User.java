@@ -29,7 +29,7 @@ import jakarta.persistence.Table;
 public class User implements UserDetails{
 	
 	
-	private Long id;
+	private Integer id;
 	private String username;
 	private String password;
 	private String firstName;
@@ -51,7 +51,7 @@ public class User implements UserDetails{
 		this.password = inputPassword;
 	}
 	
-	public User(Long id, String username, String password, String firstName, String lastName, String email,
+	public User(Integer id, String username, String password, String firstName, String lastName, String email,
 			String phone, LocalDate registrationDate, Address address) {
 		super();
 		this.id = id;
@@ -67,10 +67,10 @@ public class User implements UserDetails{
 	}
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	@Override

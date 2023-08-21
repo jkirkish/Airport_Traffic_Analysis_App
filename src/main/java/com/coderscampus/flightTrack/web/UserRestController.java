@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coderscampus.flightTrack.domain.RefreshToken;
 import com.coderscampus.flightTrack.domain.User;
 import com.coderscampus.flightTrack.repository.UserRepository;
+import com.coderscampus.flightTrack.request.RefreshTokenRequest;
 import com.coderscampus.flightTrack.response.AuthenticationResponse;
+import com.coderscampus.flightTrack.response.RefreshTokenResponse;
 import com.coderscampus.flightTrack.service.JwtService;
 import com.coderscampus.flightTrack.service.RefreshTokenService;
 import com.coderscampus.flightTrack.service.UserService;
@@ -54,5 +56,10 @@ public class UserRestController {
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(loggedInUser.getId());
         
         return ResponseEntity.ok(new AuthenticationResponse(loggedInUser.getUsername(), accessToken, refreshToken.getRefreshToken()));
+    }
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<RefreshTokenResponse> getNewAccessToken (@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        String accessToken = refreshTokenService.createNewAccessToken(refreshTokenRequest);
+        return ResponseEntity.ok(new RefreshTokenResponse(accessToken, refreshTokenRequest.refreshToken()));
     }
 }

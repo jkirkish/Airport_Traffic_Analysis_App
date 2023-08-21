@@ -1,5 +1,6 @@
 package com.coderscampus.flightTrack.service;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -9,20 +10,24 @@ import org.springframework.stereotype.Service;
 import com.coderscampus.flightTrack.domain.RefreshToken;
 import com.coderscampus.flightTrack.domain.User;
 import com.coderscampus.flightTrack.repository.RefreshTokenRepository;
+import com.coderscampus.flightTrack.request.RefreshTokenRequest;
 
 @Service
 public class RefreshTokenService {
     
     private UserService userService;
     private RefreshTokenRepository refreshTokenRepository;
+    private JwtService jwtService;
     
     @Value("${jwt.refreshTokenExpirationTimeInMillis}")
     private Long refreshTokenExpirationTimeInMillis;
     
-    public RefreshTokenService(UserService userService, RefreshTokenRepository refreshTokenRepository) {
+    public RefreshTokenService(UserService userService, RefreshTokenRepository refreshTokenRepository,
+            JwtService jwtService) {
         super();
         this.userService = userService;
         this.refreshTokenRepository = refreshTokenRepository;
+        this.jwtService = jwtService;
     }
 
     public RefreshToken generateRefreshToken (Integer userId) {
@@ -52,6 +57,24 @@ public class RefreshTokenService {
 
     private Date getRefreshTokenExpirationDate() {
         return new Date(System.currentTimeMillis() + refreshTokenExpirationTimeInMillis);
+    }
+    public String createNewAccessToken(RefreshTokenRequest refreshTokenRequest) {
+        Optional<RefreshToken> refreshTokenOpt = refreshTokenRepository.findByRefreshToken(refreshTokenRequest.refreshToken());
+        // TODO: write code to check that the RefreshToken hasn't expired
+        String accessToken = refreshTokenOpt.map(RefreshTokenService::isNonExpired)
+                .map(refreshToken -> jwtService.generateToken(new HashMap<>(), refreshToken.getUser()))
+                .orElseThrow(() -> new IllegalArgumentException("Refresh token not found"));
+        
+        return accessToken;
+        
+    }
+    
+    private static RefreshToken isNonExpired (RefreshToken refreshToken) {
+        if (refreshToken.getExpirationDate().after(new Date())) {
+            return refreshToken;
+        } else {
+            throw new IllegalArgumentException("Refresh Token has expired");
+        }
     }
     
 }

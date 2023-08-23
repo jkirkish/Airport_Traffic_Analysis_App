@@ -50,21 +50,21 @@ public class SecurityConfiguration {
 		    .authorizeHttpRequests((request) -> {
 			request
 			    .requestMatchers("/api/v1/users", "/api/v1/users/**","/api/v1/users/register").permitAll()
-			    .anyRequest().authenticated();
-//                .requestMatchers("/register").permitAll();
-//                .requestMatchers("/adminPage").hasRole("ADMIN")
-//                .requestMatchers("/airportArrivalSearch").hasRole("USER")
-//                .requestMatchers("/arrival").authenticated()
-//                .requestMatchers("/arrivals").authenticated()
-//                .requestMatchers("/arrivalSearchRequests").hasAnyRole("ADMIN", "USER")
-//                .requestMatchers("/departure.html").authenticated()
-//                .requestMatchers("/departures").authenticated()
-//                .requestMatchers("/editSearch").authenticated()
-//                .requestMatchers("/errorLogin").permitAll()
-//                .requestMatchers("/index").permitAll()
-//                .requestMatchers("/registerConfirmation").permitAll()
-//                .requestMatchers("/user").hasRole("USER")
-//                .requestMatchers("/users").hasRole("ADMIN");
+              .requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
+              .requestMatchers("/api/v1/users/airportArrivalSearch").hasRole("USER")
+              .requestMatchers("/api/v1/users/arrival").authenticated()
+              .requestMatchers("/api/v1/users/arrivals").authenticated()
+              .requestMatchers("/api/v1/users/arrivalSearchRequests").hasAnyRole("ADMIN", "USER")
+              .requestMatchers("/api/v1/users/departure.html").authenticated()
+              .requestMatchers("/api/v1/users/departures").authenticated()
+              .requestMatchers("/api/v1/users/editSearch").authenticated()
+              .requestMatchers("/api/v1/users/errorLogin").permitAll()
+              .requestMatchers("/api/v1/users/index").permitAll()
+              .requestMatchers("/api/v1/users/registerConfirmation").permitAll()
+              .requestMatchers("/api/v1/users/user").hasRole("USER")
+              .requestMatchers("/api/v1/users/users").hasRole("ADMIN");
+			   
+               
 		})
 		.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	    .authenticationProvider(authenticationProvider())

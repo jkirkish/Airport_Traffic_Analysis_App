@@ -84,14 +84,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         } 
                     }
                 } catch (ExpiredJwtException e) {
-                    token = refreshTokenService.createNewAccessToken(new RefreshTokenRequest(refreshTokenCookie.getValue()));
-                    accessTokenCookie = CookieUtils.createAccessTokenCookie(token);
-                    
-                    response.addCookie(accessTokenCookie);
-                }catch (Exception e1) {
-                    // there was a problem creating a new access token, 
-                    //  we're ignore this error on purpose in order to allow
-                    //  the flow of the filterChain to continue
+                    try {
+                        token = refreshTokenService.createNewAccessToken(new RefreshTokenRequest(refreshTokenCookie.getValue()));
+                        accessTokenCookie = CookieUtils.createAccessTokenCookie(token);
+                        
+                        response.addCookie(accessTokenCookie);
+                    } catch (Exception e1) {
+                        // there was a problem creating a new access token, 
+                        //  we're ignore this error on purpose in order to allow
+                        //  the flow of the filterChain to continue
+                    }
                 }
                 loginTryCount++;
             }

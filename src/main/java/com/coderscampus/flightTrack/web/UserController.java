@@ -59,12 +59,6 @@ public class UserController {
 		model.put("user", new User(null, null, null, null, null, null, null, null, null));
 		return "register";
 	}
-//	@PostMapping("/register")
-//	public String postCreateUser(User user) {
-//		System.out.println(user.toString());
-//		userService.saveUser(user);
-//		return "redirect:/registerConfirmation";
-//	}
 	
 	@PostMapping("register")
     public String signUpUser(@ModelAttribute User user, Model model) {

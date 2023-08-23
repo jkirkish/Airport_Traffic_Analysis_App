@@ -49,7 +49,7 @@ public class SecurityConfiguration {
 		http.csrf(AbstractHttpConfigurer::disable)
 		    .authorizeHttpRequests((request) -> {
 			request
-			    .requestMatchers("/api/v1/users", "/api/v1/users/**","/api/v1/users/register").permitAll()
+			  .requestMatchers("/api/v1/users", "/api/v1/users/**","/api/v1/users/register").permitAll()
               .requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
               .requestMatchers("/api/v1/users/airportArrivalSearch").hasRole("USER")
               .requestMatchers("/api/v1/users/arrival").authenticated()

@@ -22,13 +22,16 @@ import com.coderscampus.flightTrack.service.UserService;
 public class SecurityConfiguration {
 	
 	private UserRepository userRepo;
-	private JwtAuthenticationFilter jwtAuthenticationFilter;
-	
-	public SecurityConfiguration(UserRepository userRepo,JwtAuthenticationFilter jwtAuthenticationFilter) {
-		super();
-		this.userRepo = userRepo;
-		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-	}
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private LoginSuccessHandler loginSuccessHandler;
+
+    public SecurityConfiguration(UserRepository userRepository, JwtAuthenticationFilter jwtAuthenticationFilter,
+            LoginSuccessHandler loginSuccessHandler) {
+        super();
+        this.userRepo = userRepository;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.loginSuccessHandler = loginSuccessHandler;
+    }
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -46,10 +49,9 @@ public class SecurityConfiguration {
 		http.csrf(AbstractHttpConfigurer::disable)
 		    .authorizeHttpRequests((request) -> {
 			request
-			    .requestMatchers("/api/v1/users").permitAll()
-			    .requestMatchers("/api/v1/users/**").permitAll()
+			    .requestMatchers("/api/v1/users", "/api/v1/users/**","/api/v1/users/register").permitAll()
 			    .anyRequest().authenticated();
-//                .requestMatchers("/register").permitAll()
+//                .requestMatchers("/register").permitAll();
 //                .requestMatchers("/adminPage").hasRole("ADMIN")
 //                .requestMatchers("/airportArrivalSearch").hasRole("USER")
 //                .requestMatchers("/arrival").authenticated()
@@ -66,8 +68,13 @@ public class SecurityConfiguration {
 		})
 		.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	    .authenticationProvider(authenticationProvider())
-	    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-		
+	    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+		 .formLogin(login -> {
+	            login.loginPage("/login");
+	            login.failureUrl("/errorLogin");
+	            login.successHandler(loginSuccessHandler);
+	            login.permitAll();
+	        });
 		
 		return http.build();
 	}

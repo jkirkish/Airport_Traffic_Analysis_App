@@ -63,14 +63,15 @@
   
   <div class="container mt-3">
     <h1>Sign In Page</h1>
-    <form action="/login" method="post">
+    <p th:if="${loginError}" class="error">Wrong username or password</p>
+    <form th:action="@{/login}" method="post">
       <div class="mb-3 mt-3" style="color: white;">
         <label for="username" class="custom-label">Username:</label>
-        <input type="text" class="form-control narrow-input" id="username" placeholder="Enter username" name="username" th:field="${user.username}">
+        <input type="text" class="form-control narrow-input" id="username" autofocus="autofocus" placeholder="Enter username" name="username" th:field="${user.username}">
       </div>
       <div class="mb-3" style="color: white;">
         <label for="pwd" class="custom-label">Password:</label>
-        <input type="password" class="form-control narrow-input" id="pwd" placeholder="Enter password" name="password" th:field="${user.password}">
+        <input type="password" class="form-control narrow-input" id="pwd" autofocus="autofocus" placeholder="Enter password" name="password" th:field="${user.password}">
       </div>
       <button type="submit" class="btn btn-primary">Login in</button>
     </form>

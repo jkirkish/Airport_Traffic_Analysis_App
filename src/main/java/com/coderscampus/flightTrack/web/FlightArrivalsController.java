@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.coderscampus.flightTrack.domain.OpenSkyResponseArrival;
 import com.coderscampus.flightTrack.service.ArrivalService;
 import com.coderscampus.flightTrack.util.EpochConverter;
 
 @Controller
+@RequestMapping("/api/v1/users")
 public class FlightArrivalsController {
 
     @Autowired

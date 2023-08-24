@@ -49,7 +49,7 @@ public class SecurityConfiguration {
 		http.csrf(AbstractHttpConfigurer::disable)
 		    .authorizeHttpRequests((request) -> {
 			request
-			  .requestMatchers("/api/v1/users", "/api/v1/users/**","/api/v1/users/register").permitAll()
+			  .requestMatchers("/api/v1/users/register").permitAll()
               .requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
               .requestMatchers("/api/v1/users/airportArrivalSearch").hasRole("USER")
               .requestMatchers("/api/v1/users/arrival").authenticated()
@@ -58,9 +58,8 @@ public class SecurityConfiguration {
               .requestMatchers("/api/v1/users/departure.html").authenticated()
               .requestMatchers("/api/v1/users/departures").authenticated()
               .requestMatchers("/api/v1/users/editSearch").authenticated()
-              .requestMatchers("/api/v1/users/errorLogin").permitAll()
-              .requestMatchers("/api/v1/users/index").permitAll()
-              .requestMatchers("/api/v1/users/registerConfirmation").permitAll()
+              .requestMatchers("/api/v1/users/index").authenticated()
+              .requestMatchers("/api/v1/users/login").permitAll()
               .requestMatchers("/api/v1/users/user").hasRole("USER")
               .requestMatchers("/api/v1/users/users").hasRole("ADMIN");
 			   
@@ -70,8 +69,8 @@ public class SecurityConfiguration {
 	    .authenticationProvider(authenticationProvider())
 	    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 		 .formLogin(login -> {
-	            login.loginPage("/login");
-	            login.failureUrl("/errorLogin");
+	            login.loginPage("/api/v1/users/login");
+	            login.failureUrl("/api/v1/users/login-error");
 	            login.successHandler(loginSuccessHandler);
 	            login.permitAll();
 	        });

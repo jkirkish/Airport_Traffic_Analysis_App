@@ -44,7 +44,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 	        response.addCookie(accessTokenCookie);
 	        response.addCookie(refreshTokenCookie);
-	        response.sendRedirect("/index");
+	        response.sendRedirect("/api/v1/users/index");
 
 	    }
 

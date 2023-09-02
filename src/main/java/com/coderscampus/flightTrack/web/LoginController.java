@@ -56,7 +56,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String getLoginPage(ModelMap model) {
-		model.put("user", new User(null, null, null, null, null, null, null, null, null));
+		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
 		return "login";
 	}
 
@@ -83,7 +83,7 @@ public class LoginController {
 
 	@GetMapping("/register")
 	public String getTheUser(ModelMap model) {
-		model.put("user", new User(null, null, null, null, null, null, null, null, null));
+		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
 		return "register";
 	}
 

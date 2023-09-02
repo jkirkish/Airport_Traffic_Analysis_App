@@ -3,16 +3,14 @@ package com.coderscampus.flightTrack.domain;
 
 
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +42,10 @@ public class User implements UserDetails{
 	private Boolean expired;
 	private Set<Role> authorities;
     
-	public User() {}
+	public User() {
+		super();
+		authorities = new HashSet<>();
+	}
 	
 	public User(String inputUsername, String inputPassword) {
 		this.username = inputUsername;
@@ -52,7 +53,7 @@ public class User implements UserDetails{
 	}
 	
 	public User(Integer id, String username, String password, String firstName, String lastName, String email,
-			String phone, LocalDate registrationDate, Address address) {
+			String phone, LocalDate registrationDate, Address address,Set<Role>authorities) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -63,7 +64,7 @@ public class User implements UserDetails{
 		this.phone = phone;
 		this.registrationDate = registrationDate;
 		this.address = address;
-		
+		this.authorities = authorities;		
 	}
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
@@ -151,7 +152,7 @@ public class User implements UserDetails{
 		return Objects.equals(id, other.id);
 	}
 	@Override
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE})
 	@JoinTable(
 		name="user_role_junction",
 		joinColumns = @JoinColumn(name="user_id"),

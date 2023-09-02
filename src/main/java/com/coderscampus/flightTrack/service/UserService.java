@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService{
 
 	public User findById(Integer userId) {
 		Optional<User> userOpt = userRepo.findById(userId);
-		return userOpt.orElse(new User(userId, null, null, null, null, null, null, null, null));
+		return userOpt.orElse(new User(userId, null, null, null, null, null, null, null, null,null));
 	}
 
 	public List<User> findAll() {

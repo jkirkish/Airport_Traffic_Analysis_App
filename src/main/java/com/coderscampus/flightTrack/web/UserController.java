@@ -1,10 +1,14 @@
 package com.coderscampus.flightTrack.web;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +44,61 @@ public class UserController {
         this.userService = userService;
         this.refreshTokenService = refreshTokenService;
     }
+    @GetMapping("/adminPage")
+	public String getAdminPage() {
+		return "adminPage";
+	}
+
+	@GetMapping("/index")
+	public String getHomePage() {
+		return "index";
+	}
+
+	@GetMapping("/login")
+	public String getLoginPage(ModelMap model) {
+		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
+		return "login";
+	}
+
+	@GetMapping("/login-error")
+	public String getError(ModelMap model) {
+		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
+		model.put("loginError", true);
+		return "login";
+	}
+
+	@GetMapping("/users")
+	public String getUsers(ModelMap model) {
+
+		List<User> users = userService.findAll();
+		model.put("users", users);
+		return "users";
+	}
+
+	@GetMapping("/users/{id}")
+	public String getOneUser(ModelMap model, @PathVariable Integer id) {
+		User user = userService.findById(id);
+		model.put("user", user);
+		return "user";
+	}
+
+	@GetMapping("/register")
+	public String getTheUser(ModelMap model) {
+		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
+		return "register";
+	}
+
+	@PostMapping("/users/{userId}")
+	public String postOneUser(User user) {
+		userService.saveUser(user);
+		return "redirect:/users/" + user.getId();
+	}
+
+	@PostMapping("/users/{userId}/delete")
+	public String postDeleteUser(@PathVariable Integer userId) {
+		userService.delete(userId);
+		return "redirect:/users";
+	}
 
     @PostMapping("/register")
     public ModelAndView signUpUser(User user) {
@@ -51,19 +110,11 @@ public class UserController {
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(savedUser.getId());
 
         // You can add any necessary attributes to the model here if needed
-        ModelAndView modelAndView = new ModelAndView(new RedirectView("/register"));
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/login"));
 
         return modelAndView;
     }
     
-//    @PostMapping("/login")
-//    public ResponseEntity<AuthenticationResponse> signInUser(@RequestBody User user) {
-//        User loggedInUser = (User) userService.loadUserByUsername(user.getUsername());
-//        String accessToken = jwtService.generateToken(new HashMap<>(), loggedInUser);
-//        RefreshToken refreshToken = refreshTokenService.generateRefreshToken(loggedInUser.getId());
-//        System.out.println(ResponseEntity.ok(new AuthenticationResponse(loggedInUser.getUsername(), accessToken, refreshToken.getRefreshToken())));
-//        return ResponseEntity.ok(new AuthenticationResponse(loggedInUser.getUsername(), accessToken, refreshToken.getRefreshToken()));
-//    }
     @PostMapping("/login")
     public ModelAndView signInUser(@RequestBody User user) {
         User loggedInUser = (User) userService.loadUserByUsername(user.getUsername());
@@ -71,7 +122,7 @@ public class UserController {
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(loggedInUser.getId());
 
         // You can add any necessary attributes to the model here if needed
-        ModelAndView modelAndView = new ModelAndView(new RedirectView("/index.html"));
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/index.html"));
 
         return modelAndView;
     }

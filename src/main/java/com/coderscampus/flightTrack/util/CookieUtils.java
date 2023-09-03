@@ -10,7 +10,9 @@ public class CookieUtils {
 
     public static Cookie createAccessTokenCookie (String value) {
         Cookie accessTokenCookie = new Cookie(ACCESS_TOKEN_NAME, value);
-        
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setHttpOnly(true);
+        accessTokenCookie.setMaxAge(-1);
         return accessTokenCookie;
     }
     

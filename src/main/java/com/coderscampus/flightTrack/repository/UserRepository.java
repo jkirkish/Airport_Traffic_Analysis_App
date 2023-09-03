@@ -36,9 +36,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	//select * from users where lastname = :lastName and username 
 	List<User>findBylastNameAndUsername(String lastName, String username);
 
+	@Query("select u from User u " 
+		   + "left join fetch u.authorities " 
+		   + "where username = :username")
 	User findByUsername(String username);
-
-	
 
 	
 	

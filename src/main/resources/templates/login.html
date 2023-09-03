@@ -10,78 +10,81 @@
   <style>
     /* Background image styles */
     body {
+      font-family: Arial, sans-serif;
       background-image: url("https://picsum.photos/1200/800");
       background-size: cover;
       background-repeat: no-repeat;
-      font-family: Arial, sans-serif;
+      height: 100vh; /* Set height to 100vh to cover the entire viewport height */
     }
-    
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9); /* Light background color */
+      border: 1px solid #ccc; /* Light border around the container */
+      padding: 20px; /* Add some padding to the container */
+      border-radius: 5px; /* Add rounded corners to the container */
+    }
+
     h1 {
-      text-align: center; /* Center the h1 tag */
-      padding: 10px; /* Add some padding for better visibility */
-      display: block; /* Change the display to block to center the h1 tag */
-      animation: glow 2s infinite alternate; /* Apply the glow animation */
-      color: rgba(255, 255, 1, 0.8); /* Set text color with opacity */
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Add a subtle text shadow */
-      border: 2px dotted rgba(255, 255, 255, 0.8); /* Add dotted border */
-      padding: 10px; /* Add padding to create space between text and border */
-    }
-    
-    @keyframes glow {
-      0% {
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-      }
-      100% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-      }
-    }
-    
+    	  text-align: center;
+    	  padding: 10px;
+    	  display: block;
+    	  animation: glow 2s infinite alternate;
+    	  color: rgba(0, 0, 0, 0.8); /* Set text color to black */
+    	  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    	  border: 2px dotted rgba(255, 255, 255, 0.8);
+    	  padding: 10px;
+    	  border-bottom: 2px solid rgba(0, 0, 0, 0.8); /* Add a solid underline */
+    	}
+
     /* Custom input field width */
     .narrow-input {
       max-width: 250px;
     }
-    
+
     /* Custom style for labels */
     .bigger-font {
-      font-size: 20px; /* Set the font size of the labels */
-      color: rgba(255, 255, 255, 0.8); /* Set label text color with opacity */
+      font-size: 20px;
+      color: black; /* Set label text color to black */
     }
-    
+
     /* Custom label style */
     .custom-label {
       font-size: 18px;
-      color: rgba(173, 216, 230, 0.9); /* Light blue with more opacity */
-      font-weight: bold; /* Make the labels bold */
-      padding: 5px; /* Add some padding for better appearance */
-      display: inline-block; /* Make labels inline-block for consistent alignment */
-      margin-right: 10px; /* Add margin for spacing between labels and input fields */
+      color: black; /* Set label text color to black */
+      font-weight: bold;
+      padding: 5px;
+      display: inline-block;
+      margin-right: -320px;
+      margin-bottom: 5px; /* Reduce the margin between labels */
     }
+
     .error {
-    	color: red;
+      color: red;
     }
   </style>
 </head>
 
 <body>
-  
+
   <div class="container mt-3">
     <h1>Sign In Page</h1>
     <p th:if="${loginError}" class="error">Wrong username or password</p>
     <form th:action="@{/api/v1/users/login}" method="post">
-      <div class="mb-3 mt-3" style="color: white;">
-        <label for="username" class="custom-label">Username:</label>
-        <input type="text" class="form-control narrow-input" id="username" autofocus="autofocus" placeholder="Enter username" name="username" th:field="${user.username}">
+      <div class="mb-3 mt-3 row" style="color: white;">
+        <label for="username" class="custom-label col-4">Username:</label>
+        <input type="text" class="form-control narrow-input col-8" id="username" autofocus="autofocus"
+          placeholder="Enter username" name="username" th:field="${user.username}">
       </div>
-      <div class="mb-3" style="color: white;">
-        <label for="pwd" class="custom-label">Password:</label>
-        <input type="password" class="form-control narrow-input" id="pwd" autofocus="autofocus" placeholder="Enter password" name="password" th:field="${user.password}">
+      <div class="mb-3 row" style="color: white;">
+        <label for="pwd" class="custom-label col-4">Password:</label>
+        <input type="password" class="form-control narrow-input col-8" id="pwd" autofocus="autofocus"
+          placeholder="Enter password" name="password" th:field="${user.password}">
       </div>
-      <button type="submit" class="btn btn-primary">Login in</button>
+      <button type="submit" class="btn btn-primary col-12">Login in</button>
     </form>
   </div>
-  
+
 </body>
 
 </html>
-
 

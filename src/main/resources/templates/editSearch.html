@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <h1>Edit Search Information</h1>
-    <form id="editForm" action="/arrivalSearchRequests" method="post">
+    <form id="editForm" action="/api/v1/users/arrivalSearchRequests" method="post">
         <input type="hidden" name="id" th:value="${search.id}">
         <div class="form-group">
             <label for="searchType">Search Type:</label>

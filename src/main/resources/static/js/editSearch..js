@@ -42,8 +42,6 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
     var startInput = document.getElementById("start");
     var endInput = document.getElementById("end");
 
-    // ... (rest of the validation code)
-
-    // Rest of the code for checking time interval
+   
 
 });

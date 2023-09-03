@@ -37,7 +37,7 @@ public class Role implements GrantedAuthority{
 		this.users = users;
 	}
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="role_id")
 	public Long getRoleId() {
 		return this.roleId;

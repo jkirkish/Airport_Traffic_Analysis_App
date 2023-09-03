@@ -10,7 +10,7 @@ function deleteUser() {
                 throw new Error('Failed to delete user');
             }
             alert('User deleted successfully');
-            // Redirect to the user list page or perform any other desired action
+            
         })
         .catch(error => {
             console.error(error);

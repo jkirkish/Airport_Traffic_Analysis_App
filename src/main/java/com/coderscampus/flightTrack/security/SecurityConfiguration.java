@@ -50,20 +50,18 @@ public class SecurityConfiguration {
 		    .authorizeHttpRequests((request) -> {
 			request
 			  .requestMatchers("/api/v1/users/register").permitAll()
-			  .requestMatchers("/h2-console").permitAll()
               .requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
-              .requestMatchers("/api/v1/users/airportArrivalSearch").hasRole("USER")
+              .requestMatchers("/api/v1/searches/airportArrivalSearch").hasAnyRole("ADMIN","USER")
               .requestMatchers("/api/v1/users/arrival").authenticated()
               .requestMatchers("/api/v1/users/arrivals").authenticated()
-              .requestMatchers("/api/v1/users/arrivalSearchRequests").hasAnyRole("ADMIN", "USER")
+              .requestMatchers("/api/v1/searches/arrivalSearchRequests").hasAnyRole("ADMIN","USER")
               .requestMatchers("/api/v1/users/departure.html").authenticated()
               .requestMatchers("/api/v1/users/departures").authenticated()
               .requestMatchers("/api/v1/users/editSearch").authenticated()
               .requestMatchers("/api/v1/users/index").authenticated()
               .requestMatchers("/api/v1/users/login").permitAll()
-              .requestMatchers("/api/v1/users/user").hasRole("USER")
-              .requestMatchers("/api/v1/users/users").hasRole("ADMIN")
-			  .anyRequest().permitAll();
+              .requestMatchers("/api/v1/users/user").hasAnyRole("ADMIN","USER")
+              .requestMatchers("/api/v1/users/users").hasRole("ADMIN");
                
 		})
 		.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

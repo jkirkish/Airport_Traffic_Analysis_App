@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "roles")
 public class Role implements GrantedAuthority{
 	
-	private Long roleId;
+	private Integer roleId;
 	private String authority;
 	private List<User> users = new ArrayList<>();
 	
@@ -26,11 +26,11 @@ public class Role implements GrantedAuthority{
 	public Role(String authority) {
 		this.authority = authority;
 	}
-	public Role(Long roleId, String authority) {
+	public Role(Integer roleId, String authority) {
 		this.roleId = roleId;
 		this.authority = authority;
 	}
-	public Role(Long roleId, String authority, List<User> users) {
+	public Role(Integer roleId, String authority, List<User> users) {
 		super();
 		this.roleId = roleId;
 		this.authority = authority;
@@ -39,10 +39,10 @@ public class Role implements GrantedAuthority{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="role_id")
-	public Long getRoleId() {
+	public Integer getRoleId() {
 		return this.roleId;
 	}
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
     	this.roleId = roleId;
     }
 	@Override
@@ -57,6 +57,7 @@ public class Role implements GrantedAuthority{
 		return users;
 	}
 	public void setUsers(List<User> users) {
+		
 		this.users = users;
 	}
 	

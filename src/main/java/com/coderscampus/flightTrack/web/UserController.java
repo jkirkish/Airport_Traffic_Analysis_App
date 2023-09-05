@@ -19,10 +19,10 @@ import com.coderscampus.flightTrack.domain.RefreshToken;
 import com.coderscampus.flightTrack.domain.User;
 import com.coderscampus.flightTrack.repository.UserRepository;
 import com.coderscampus.flightTrack.request.RefreshTokenRequest;
-import com.coderscampus.flightTrack.response.AuthenticationResponse;
 import com.coderscampus.flightTrack.response.RefreshTokenResponse;
 import com.coderscampus.flightTrack.service.JwtService;
 import com.coderscampus.flightTrack.service.RefreshTokenService;
+import com.coderscampus.flightTrack.service.RoleService;
 import com.coderscampus.flightTrack.service.UserService;
 
 //@RestController
@@ -34,15 +34,17 @@ public class UserController {
     private JwtService jwtService;
     private UserService userService;
     private RefreshTokenService refreshTokenService;
+    private RoleService roleService;
     
     public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService,
-            UserService userService, RefreshTokenService refreshTokenService) {
+            UserService userService, RefreshTokenService refreshTokenService,RoleService roleService) {
         super();
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.userService = userService;
         this.refreshTokenService = refreshTokenService;
+        this.roleService = roleService;
     }
     @GetMapping("/adminPage")
 	public String getAdminPage() {
@@ -108,9 +110,11 @@ public class UserController {
         
         String accessToken = jwtService.generateToken(new HashMap<>(), savedUser);
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(savedUser.getId());
-
+        roleService.addNormalUser(savedUser);
+        roleService.addAdminUser(savedUser); 
+        
         // You can add any necessary attributes to the model here if needed
-        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/login"));
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/vi/users/login"));
 
         return modelAndView;
     }
@@ -122,7 +126,7 @@ public class UserController {
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(loggedInUser.getId());
 
         // You can add any necessary attributes to the model here if needed
-        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/index.html"));
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/index"));
 
         return modelAndView;
     }

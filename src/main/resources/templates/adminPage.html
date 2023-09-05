@@ -9,48 +9,52 @@
   <!-- Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <style>
-  /* Background image styles */
-  body {
-    background-image: url("https://picsum.photos/1200/800");
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif;
-  }
+    /* Background image styles */
+    body {
+      background-image: url("https://picsum.photos/1200/800");
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+    }
 
-  .centered-heading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+    .centered-heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      border: 2px solid grey; /* Add a border */
+      background: grey; /* Add a grey background */
+    }
 
-  .highlight {
-    color: white;
-    padding: 10px;
-    /* Special effects */
-    animation: glowing 2s infinite;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    border: 2px solid yellow;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  }
-.highlight{
-	background:rgba (255,255,255,0.8);
-}
-  /* Animation keyframes for glowing effect */
-  @keyframes glowing {
-    0% {
-      opacity: 0.5;
+    .highlight {
+      color: white;
+      padding: 10px;
+      /* Special effects */
+      animation: glowing 2s infinite;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      border: 2px solid yellow;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
-    50% {
-      opacity: 1;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+
+    .highlight {
+      background: rgba(255, 255, 255, 0.8);
     }
-    100% {
-      opacity: 0.5;
+
+    /* Animation keyframes for glowing effect */
+    @keyframes glowing {
+      0% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+      }
+      100% {
+        opacity: 0.5;
+      }
     }
-  }
-</style>
+  </style>
 </head>
 
 <body>
@@ -69,27 +73,24 @@
           <a class="nav-link" href="api/v1/users/users">Users</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="api/v1/users/airportArrivalSearch">SearchForm</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="arrivals">Arrivals</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="api/v1/users/departures">Departures</a>
-    </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/h2-console/">H2 Console</a>
+          <a class="nav-link" href="api/v1/users/airportArrivalSearch">SearchForm</a>
         </li>
         <li class="nav-item">
-      	   <a class="nav-link" href="api/v1/users/arrivalSearchRequests">SearchRequests</a>
+          <a class="nav-link" href="arrivals">Arrivals</a>
         </li>
         <li class="nav-item">
-   	      <a class="nav-link" href="api/v1/users/dashboard">Dashboard</a>
+          <a class="nav-link" href="api/v1/users/departures">Departures</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="api/v1/users/arrivalSearchRequests">SearchRequests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="api/v1/users/dashboard">Dashboard</a>
         </li>
       </ul>
     </div>
   </nav>
-  
+
   <div class="centered-heading">
     <h1 class="highlight">ADMIN</h1>
   </div>

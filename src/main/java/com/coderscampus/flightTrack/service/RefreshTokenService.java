@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coderscampus.flightTrack.domain.RefreshToken;
 import com.coderscampus.flightTrack.domain.User;
@@ -76,5 +77,10 @@ public class RefreshTokenService {
             throw new IllegalArgumentException("Refresh Token has expired");
         }
     }
+    @Transactional
+	public void deleteByUserId(Integer userId) {
+		refreshTokenRepository.deleteByUserId(userId);
+		
+	}
     
 }

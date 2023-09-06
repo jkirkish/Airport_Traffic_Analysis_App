@@ -19,6 +19,9 @@
             <a class="nav-link" href="/airportArrivalSearch">SearchForm</a>
         </li>
         <li class="nav-item">
+           <a class="nav-link" href="/arrivalSearchRequests">SearchRequests</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/arrivals">Arrivals</a>
         </li>
         <li class="nav-item">
@@ -63,7 +66,8 @@ function saveChanges() {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 alert("Changes saved successfully!");
-                // Optionally perform additional actions after saving changes
+                // Redirect to the desired page after a successful save
+                window.location.href = "/arrivalSearchRequests";
             } else {
                 alert("Failed to save changes. Please try again.");
             }
@@ -71,6 +75,7 @@ function saveChanges() {
         xhr.send(formData);
     }
 }
+
 
 function confirmDelete() {
     if (confirm("Are you sure you want to delete this search?")) {
@@ -81,7 +86,8 @@ function confirmDelete() {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 alert("Search deleted successfully!");
-                // Optionally perform additional actions after deleting the search
+                // Redirect to the desired page after a successful delete
+                window.location.href = "/arrivalSearchRequests";
             } else {
                 alert("Failed to delete search. Please try again.");
             }

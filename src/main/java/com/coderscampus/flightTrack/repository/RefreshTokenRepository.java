@@ -9,5 +9,7 @@ import com.coderscampus.flightTrack.domain.RefreshToken;
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Integer>{
 
 	 Optional<RefreshToken> findByRefreshToken(String refreshToken);
+	 
+	 void deleteByUserId(Integer userId);
 	
 }

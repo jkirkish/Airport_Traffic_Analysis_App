@@ -98,6 +98,7 @@ public class UserController {
 
 	@PostMapping("/users/{userId}/delete")
 	public String postDeleteUser(@PathVariable Integer userId) {
+		refreshTokenService.deleteByUserId(userId);
 		userService.delete(userId);
 		return "redirect:/api/v1/users/users";
 	}

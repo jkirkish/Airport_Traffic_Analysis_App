@@ -20,68 +20,71 @@ import com.coderscampus.flightTrack.service.UserService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-	
-	private UserRepository userRepo;
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
-    private LoginSuccessHandler loginSuccessHandler;
 
-    public SecurityConfiguration(UserRepository userRepository, JwtAuthenticationFilter jwtAuthenticationFilter,
-            LoginSuccessHandler loginSuccessHandler) {
-        super();
-        this.userRepo = userRepository;
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.loginSuccessHandler = loginSuccessHandler;
-    }
+	private UserRepository userRepo;
+	private JwtAuthenticationFilter jwtAuthenticationFilter;
+	private LoginSuccessHandler loginSuccessHandler;
+
+	public SecurityConfiguration(UserRepository userRepository, JwtAuthenticationFilter jwtAuthenticationFilter,
+			LoginSuccessHandler loginSuccessHandler) {
+		super();
+		this.userRepo = userRepository;
+		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+		this.loginSuccessHandler = loginSuccessHandler;
+	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-		
+
 	}
-	
+
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return new UserService(userRepo);
 	}
-	
+
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		http.csrf(AbstractHttpConfigurer::disable)
-		    .authorizeHttpRequests((request) -> {
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((request) -> {
 			request
-			  .requestMatchers("/api/v1/users/register").permitAll()
-              .requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
-              .requestMatchers("/api/v1/searches/airportArrivalSearch").hasAnyRole("ADMIN","USER")
-              .requestMatchers("/api/v1/users/arrival").authenticated()
-              .requestMatchers("/api/v1/users/arrivals").authenticated()
-              .requestMatchers("/api/v1/searches/arrivalSearchRequests").hasAnyRole("ADMIN","USER")
-              .requestMatchers("/api/v1/users/departure.html").authenticated()
-              .requestMatchers("/api/v1/users/departures").authenticated()
-              .requestMatchers("/api/v1/users/editSearch").authenticated()
-              .requestMatchers("/api/v1/users/index").authenticated()
-              .requestMatchers("/api/v1/users/login").permitAll()
-              .requestMatchers("/api/v1/users/user").hasAnyRole("ADMIN","USER")
-              .requestMatchers("/api/v1/users/users").hasRole("ADMIN");
-               
+
+					.requestMatchers("/api/v1/users/register").permitAll()
+					.requestMatchers("/api/v1/users/adminPage").authenticated()   //hasRole("ADMIN_USER")
+					.requestMatchers("/airportArrivalSearch/**").authenticated()
+					.requestMatchers("/arrival/**").authenticated()
+					.requestMatchers("/arrivals/**").authenticated()
+					.requestMatchers("/arrivalSearchRequests/**").authenticated()
+					.requestMatchers("/departure/**").authenticated()
+					.requestMatchers("/departures/**").authenticated()
+					.requestMatchers("/editSearch/**").authenticated()
+					.requestMatchers("/api/v1/users/index").authenticated()
+					.requestMatchers("/search/**").authenticated()
+					.requestMatchers("/api/v1/users/login").permitAll()
+					.requestMatchers("/user/**").authenticated()  //hasAnyRole("ADMIN_USER", "USER_USER")
+					.requestMatchers("/api/v1/users/users/**").authenticated();     //hasRole("ADMIN_USER");
+
 		})
-		.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	    .authenticationProvider(authenticationProvider())
-	    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-		 .formLogin(login -> {
-	            login.loginPage("/api/v1/users/login");
-	            login.failureUrl("/api/v1/users/login-error");
-	            login.successHandler(loginSuccessHandler);
-	            login.permitAll();
-	        });
-		
+
+				.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authenticationProvider(authenticationProvider())
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.formLogin(login -> {
+					login.loginPage("/api/v1/users/login");
+					login.failureUrl("/api/v1/users/login-error");
+					login.successHandler(loginSuccessHandler);
+					login.permitAll();
+				});
+
 		return http.build();
 	}
+
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 		daoAuthenticationProvider.setUserDetailsService(userDetailsService());
 		return daoAuthenticationProvider;
-		
+
 	}
 }

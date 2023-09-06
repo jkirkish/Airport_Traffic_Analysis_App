@@ -93,13 +93,13 @@ public class UserController {
 	@PostMapping("/users/{userId}")
 	public String postOneUser(User user) {
 		userService.saveUser(user);
-		return "redirect:/users/" + user.getId();
+		return "redirect:/api/v1/users/users";
 	}
 
 	@PostMapping("/users/{userId}/delete")
 	public String postDeleteUser(@PathVariable Integer userId) {
 		userService.delete(userId);
-		return "redirect:/users";
+		return "redirect:/api/v1/users/users";
 	}
 
     @PostMapping("/register")

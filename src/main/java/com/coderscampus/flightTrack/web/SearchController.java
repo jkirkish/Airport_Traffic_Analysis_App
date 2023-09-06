@@ -20,7 +20,6 @@ import com.coderscampus.flightTrack.service.SearchService;
 import com.coderscampus.flightTrack.service.UserService;
 
 @Controller
-@RequestMapping("/api/v1/searches")
 public class SearchController {
 	
 	

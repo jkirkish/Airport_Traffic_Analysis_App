@@ -15,7 +15,6 @@ import com.coderscampus.flightTrack.service.DepartureService;
 import com.coderscampus.flightTrack.util.EpochConverter;
 
 @Controller
-@RequestMapping("/api/v1/users")
 public class FlightDeparturesController {
 
 	@Autowired

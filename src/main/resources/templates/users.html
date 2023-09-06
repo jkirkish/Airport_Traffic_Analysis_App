@@ -50,7 +50,7 @@
                 <div th:each="user : ${users}" class="row-with-border">
                 	<hr/>
                     <div class="row">
-                        <div class="col"><a th:href="@{/users/{id}(id=${user.id})}" type="text">[[${user.id}]]</a></div>
+                        <div class="col"><a th:href="@{/api/v1/users/users/{id}(id=${user.id})}" type="text">[[${user.id}]]</a></div>
                         <div class="col" th:text="${user.username}"></div>
                         <div class="col" style="visibility:hidden;" th:text="${user.password}"></div>
                         <div class="col" th:text="${user.firstName}"></div>

@@ -8,6 +8,25 @@
   
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<label class="navbar-brand" for="flight-tracking">Flight Tracking</label>
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/api/v1/users/index">Index</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/airportArrivalSearch">SearchForm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/arrivals">Arrivals</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/departures">Departures</a>
+        </li>
+    </ul>
+</div>
+</nav>
 <div class="container">
     <h1>Edit Search Information</h1>
     <form id="editForm" action="/api/v1/users/arrivalSearchRequests" method="post">
@@ -34,6 +53,56 @@
         </div>
     </form>
 </div>
+<script>
+function saveChanges() {
+    if (confirm("Are you sure you want to save changes?")) {
+        var formData = new FormData(document.getElementById("editForm"));
+        var searchId = document.querySelector('input[name="id"]').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/search/save/" + searchId, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("Changes saved successfully!");
+                // Optionally perform additional actions after saving changes
+            } else {
+                alert("Failed to save changes. Please try again.");
+            }
+        };
+        xhr.send(formData);
+    }
+}
+
+function confirmDelete() {
+    if (confirm("Are you sure you want to delete this search?")) {
+        var searchId = document.querySelector('input[name="id"]').value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/search/delete/" + searchId, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert("Search deleted successfully!");
+                // Optionally perform additional actions after deleting the search
+            } else {
+                alert("Failed to delete search. Please try again.");
+            }
+        };
+        xhr.send();
+    }
+}
+
+// JavaScript code for validating and formatting input fields
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+    var searchTypeInput = document.getElementById("searchtype");
+    var airportInput = document.getElementById("airport");
+    var startInput = document.getElementById("start");
+    var endInput = document.getElementById("end");
+
+   
+
+});
+
+</script>
+
 <!-- jQuery and Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

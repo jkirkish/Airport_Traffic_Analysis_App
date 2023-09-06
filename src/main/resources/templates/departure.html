@@ -19,16 +19,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/index">Index</a>
+                <a class="nav-link" href="/api/v1/users/index">Index</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/searches/airportArrivalSearch">SearchForm</a>
+                <a class="nav-link" href="/airportArrivalSearch">SearchForm</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/arrivals">Arrivals</a>
+                <a class="nav-link" href="/arrivals">Arrivals</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/departures">Departures</a>
+                <a class="nav-link" href="/departures">Departures</a>
             </li>
         </ul>
     </div>
@@ -80,7 +80,32 @@
         <button type="button" onclick="goToDeparturesPage()">Back</button>
     </form>
 </div>
+<script>
+function goToDeparturesPage() {
+    window.location.href = "/departures";
+}
 
+function deleteDeparture() {
+    // Retrieve the departure ID
+    var departureId = document.querySelector('span[data-departure-id]').innerText;
+
+    // Perform an AJAX request to delete the departure
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/departures/delete/" + departureId, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        // Handle the response from the server
+        if (xhr.status === 200) {
+            alert("Departure deleted successfully!");
+            // Redirect to the departures page
+            window.location.href = "/departures";
+        } else {
+            alert("Failed to delete departure. Please try again.");
+        }
+    };
+    xhr.send();
+}
+</script>
 <!-- jQuery and Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

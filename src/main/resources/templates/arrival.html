@@ -19,16 +19,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/index">Index</a>
+                <a class="nav-link" href="/api/v1/users/index">Index</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/searches/airportArrivalSearch">SearchForm</a>
+                <a class="nav-link" href="/airportArrivalSearch">SearchForm</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/arrivals">Arrivals</a>
+                <a class="nav-link" href="/arrivals">Arrivals</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/departures">Departures</a>
+                <a class="nav-link" href="/departures">Departures</a>
             </li>
         </ul>
     </div>
@@ -80,6 +80,32 @@
             <button type="button" onclick="goToArrivalsPage()">Back</button>
         </form>
     </div>
+    <script>
+    function goToArrivalsPage() {
+        window.location.href = "/arrivals";
+    }
+
+    function deleteArrival() {
+        // Retrieve the arrival ID
+        var arrivalId = document.querySelector('span[data-arrival-id]').innerText;
+
+        // Perform an AJAX request to delete the arrival
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/arrivals/delete/" + arrivalId, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function () {
+            // Handle the response from the server
+            if (xhr.status === 200) {
+                alert("Arrival deleted successfully!");
+                // Redirect to the arrivals page
+                window.location.href = "/arrivals";
+            } else {
+                alert("Failed to delete arrival. Please try again.");
+            }
+        };
+        xhr.send();
+    }
+    </script>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

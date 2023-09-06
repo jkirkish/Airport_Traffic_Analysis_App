@@ -50,19 +50,19 @@ public class SecurityConfiguration {
 			request
 
 					.requestMatchers("/api/v1/users/register").permitAll()
-					.requestMatchers("/api/v1/users/adminPage").authenticated()   //hasRole("ADMIN_USER")
-					.requestMatchers("/airportArrivalSearch/**").authenticated()
+					.requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
+					.requestMatchers("/airportArrivalSearch/**").hasRole("USER")
 					.requestMatchers("/arrival/**").authenticated()
 					.requestMatchers("/arrivals/**").authenticated()
-					.requestMatchers("/arrivalSearchRequests/**").authenticated()
+					.requestMatchers("/arrivalSearchRequests/**").hasAnyRole("ADMIN","USER")
 					.requestMatchers("/departure/**").authenticated()
 					.requestMatchers("/departures/**").authenticated()
 					.requestMatchers("/editSearch/**").authenticated()
 					.requestMatchers("/api/v1/users/index").authenticated()
 					.requestMatchers("/search/**").authenticated()
 					.requestMatchers("/api/v1/users/login").permitAll()
-					.requestMatchers("/user/**").authenticated()  //hasAnyRole("ADMIN_USER", "USER_USER")
-					.requestMatchers("/api/v1/users/users/**").authenticated();     //hasRole("ADMIN_USER");
+					.requestMatchers("/user/**").hasAnyRole("ADMIN","USER")
+					.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");
 
 		})
 

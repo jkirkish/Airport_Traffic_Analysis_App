@@ -51,10 +51,10 @@ public class SecurityConfiguration {
 
 					.requestMatchers("/api/v1/users/register").permitAll()
 					.requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
-					.requestMatchers("/airportArrivalSearch/**").hasRole("USER")
+					.requestMatchers("/airportArrivalSearch/**").authenticated()
 					.requestMatchers("/arrival/**").authenticated()
 					.requestMatchers("/arrivals/**").authenticated()
-					.requestMatchers("/arrivalSearchRequests/**").hasAnyRole("ADMIN","USER")
+					.requestMatchers("/arrivalSearchRequests/**").authenticated()
 					.requestMatchers("/departure/**").authenticated()
 					.requestMatchers("/departures/**").authenticated()
 					.requestMatchers("/editSearch/**").authenticated()

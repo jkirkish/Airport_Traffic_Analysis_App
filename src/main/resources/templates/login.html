@@ -65,8 +65,18 @@
 </head>
 
 <body>
-
+<<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<label class="navbar-brand" for="flight-tracking">Flight Tracking</label>
+<div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/api/v1/users/register">Register</a>
+    </li>
+  </ul>
+</div>
+</nav>
   <div class="container mt-3">
+  <p>If you have not registered, click on the register link.</p>
     <h1>Sign In Page</h1>
     <p th:if="${loginError}" class="error">Wrong username or password</p>
     <form th:action="@{/api/v1/users/login}" method="post">

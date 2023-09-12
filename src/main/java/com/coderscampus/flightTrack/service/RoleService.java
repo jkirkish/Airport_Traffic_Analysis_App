@@ -18,7 +18,7 @@ public class RoleService {
 	
 	public void addNormalUser(User user) {
 		Role role = new Role();
-		role.setAuthority("USER");
+		role.setAuthority("ROLE_USER");
 		System.out.println("Role is: " + role.getAuthority() );
 		role.getUsers().add(user);
 		user.getAuthorities().add(role);
@@ -29,11 +29,11 @@ public class RoleService {
 	
 	public void addAdminUser(User user) {
         // Check if there are any existing users with "ADMIN" role
-        boolean isAdminExists = roleRepo.existsByAuthority("ADMIN");
+        boolean isAdminExists = roleRepo.existsByAuthority("ROLE_ADMIN");
 
         if (!isAdminExists) {
             Role role = new Role();
-            role.setAuthority("ADMIN");
+            role.setAuthority("ROLE_ADMIN");
             role.getUsers().add(user);
             user.getAuthorities().add(role);
             roleRepo.save(role);

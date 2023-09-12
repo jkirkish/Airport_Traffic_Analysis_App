@@ -91,6 +91,9 @@ public class UserService implements UserDetailsService{
 		return user;
 	}
 
-	
+	public Long getUserCount() {
+		
+		return userRepo.count();
+	}
 
 }

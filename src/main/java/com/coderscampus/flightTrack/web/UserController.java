@@ -98,8 +98,15 @@ public class UserController {
 
 	@PostMapping("/users/{userId}/delete")
 	public String postDeleteUser(@PathVariable Integer userId) {
-		refreshTokenService.deleteByUserId(userId);
-		userService.delete(userId);
+
+		Long userCount = userService.getUserCount();
+
+		if (userCount > 1) {
+
+			refreshTokenService.deleteByUserId(userId);
+			userService.delete(userId);
+		}
+
 		return "redirect:/api/v1/users/users";
 	}
 
@@ -111,8 +118,8 @@ public class UserController {
         
         String accessToken = jwtService.generateToken(new HashMap<>(), savedUser);
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(savedUser.getId());
+        roleService.addAdminUser(savedUser);
         roleService.addNormalUser(savedUser);
-        roleService.addAdminUser(savedUser); 
         
         // You can add any necessary attributes to the model here if needed
         ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/vi/users/login"));

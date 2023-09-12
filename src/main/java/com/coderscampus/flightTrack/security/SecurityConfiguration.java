@@ -49,20 +49,20 @@ public class SecurityConfiguration {
 		http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((request) -> {
 			request
 
-					.requestMatchers("/api/v1/users/register").permitAll()
-					.requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
-					.requestMatchers("/airportArrivalSearch/**").authenticated()
-					.requestMatchers("/arrival/**").authenticated()
-					.requestMatchers("/arrivals/**").authenticated()
-					.requestMatchers("/arrivalSearchRequests/**").authenticated()
-					.requestMatchers("/departure/**").authenticated()
-					.requestMatchers("/departures/**").authenticated()
-					.requestMatchers("/editSearch/**").authenticated()
-					.requestMatchers("/api/v1/users/index").authenticated()
-					.requestMatchers("/search/**").authenticated()
-					.requestMatchers("/api/v1/users/login").permitAll()
-					.requestMatchers("/user/**").hasAnyRole("ADMIN","USER")
-					.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");
+			.requestMatchers("/api/v1/users/register").permitAll()
+			.requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
+			.requestMatchers("/airportArrivalSearch/**").authenticated()
+			.requestMatchers("/arrival/**").authenticated()
+			.requestMatchers("/arrivals/**").authenticated()
+			.requestMatchers("/arrivalSearchRequests/**").authenticated()
+			.requestMatchers("/departure/**").authenticated()
+			.requestMatchers("/departures/**").authenticated()
+			.requestMatchers("/editSearch/**").authenticated()
+			.requestMatchers("/api/v1/users/index").authenticated()
+			.requestMatchers("/search/**").authenticated()
+			.requestMatchers("/api/v1/users/login").permitAll()
+			.requestMatchers("/api/v1/users//user/**").hasAnyRole("ADMIN","USER")
+			.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");
 
 		})
 

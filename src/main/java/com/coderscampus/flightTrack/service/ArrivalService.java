@@ -44,4 +44,7 @@ public class ArrivalService {
     public void deleteArrival(Long id) {
         arrivalsRepository.deleteById(id);
     }
+    public void deleteAllArrivals() {
+        arrivalsRepository.deleteAll(); 
+    }
 }

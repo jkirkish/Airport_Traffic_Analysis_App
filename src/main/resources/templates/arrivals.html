@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Flight Arrival List</title>
+    <title>Arrival Details</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- Bootstrap CSS -->
@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="api/v1/users/index">Index</a>
+                <a class="nav-link" href="/api/v1/users/index">Index</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/airportArrivalSearch">SearchForm</a>
@@ -34,40 +34,83 @@
     </div>
 </nav>
 <div class="container">
-    <h2>Flight Arrival List</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>ICAO24</th>
-            <th>First Seen(Epoch Time)</th>
-            <th>Last Seen(Epoch Time)</th>
-            <th>Est. Arrival Airport</th>
-            <th>Call Sign</th>
-            <th>Est. Arrival Airport Horiz. Distance</th>
-            <th>Est. Arrival Airport Vert. Distance</th>
-            <th>Arrival Airport Candidates Count</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="arrival : ${arrivals}" class="row-with-border">
-            <td><a th:href="@{/arrivals/{id}(id=${arrival.id})}" type="text">[[${arrival.id}]]</a></td>
-            <td th:text="${arrival.icao24}"></td>
-            <td th:text="${arrival.firstSeen}"></td>
-            <td th:text="${arrival.lastSeen}"></td>
-            <td th:text="${arrival.estArrivalAirport}"></td>
-            <td th:text="${arrival.callSign}"></td>
-            <td th:text="${arrival.estArrivalAirportHorizDistance}"></td>
-            <td th:text="${arrival.estArrivalAirportVertDistance}"></td>
-            <td th:text="${arrival.arrivalAirportCandidatesCount}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <h2>Arrival Details</h2>
+    <form id="arrivalForm">
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td><span th:text="${arrival.id}" data-arrival-id="${arrival.id}"></span></td>
+            </tr>
+            <tr>
+                <th>ICAO24</th>
+                <td><span th:text="${arrival.icao24}"></span></td>
+            </tr>
+            <tr>
+                <th>First Seen(Human Readable Date)</th>
+                <td><span th:text="${firstSeenFormatted}"></span></td>
+            </tr>
+            <tr>
+                <th>Est. Arrival Airport</th>
+                <td><span th:text="${arrival.estArrivalAirport}"></span></td>
+            </tr>
+            <tr>
+                <th>Last Seen(Human Readable Date)</th>
+                <td><span th:text="${lastSeenFormatted}"></span></td>
+            </tr>
+            <tr>
+                <th>Call Sign</th>
+                <td><span th:text="${arrival.callSign}"></span></td>
+                </tr>
+                <tr>
+                    <th>Est. Arrival Airport Horiz. Distance</th>
+                    <td><span th:text="${arrival.estArrivalAirportHorizDistance}"></span></td>
+                </tr>
+                <tr>
+                    <th>Est. Arrival Airport Vert. Distance</th>
+                    <td><span th:text="${arrival.estArrivalAirportVertDistance}"></span></td>
+                </tr>
+                <tr>
+                    <th>Arrival Airport Candidates Count</th>
+                    <td><span th:text="${arrival.arrivalAirportCandidatesCount}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" onclick="deleteArrival()">Delete</button>
+            <button type="button" onclick="goToArrivalsPage()">Back</button>
+        </form>
+    </div>
+    <script>
+    function goToArrivalsPage() {
+        window.location.href = "/arrivals";
+    }
 
-<!-- jQuery and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+    function deleteArrival() {
+        // Retrieve the arrival ID
+        var arrivalId = document.querySelector('span[data-arrival-id]').innerText;
+
+        // Perform an AJAX request to delete the arrival
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/arrivals/delete/" + arrivalId, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function () {
+            // Handle the response from the server
+            if (xhr.status === 200) {
+                alert("Arrival deleted successfully!");
+                // Redirect to the arrivals page
+                window.location.href = "/arrivals";
+            } else {
+                alert("Failed to delete arrival. Please try again.");
+            }
+        };
+        xhr.send();
+    }
+    </script>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/arrival.js"></script>
+    </body>
+    </html

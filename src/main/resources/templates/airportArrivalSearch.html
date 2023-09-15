@@ -54,9 +54,12 @@
     <h1>Search Flights</h1>
     <form action="/airportArrivalSearch" method="post" id="searchForm">
         <div class="form-group">
-            <label for="SearchType">Search Type:</label>
-            <input type="text" class="form-control" id="searchtype" name="searchType" placeholder="Enter Arrival or Departure" required>
-        </div>
+        <label for="searchType">Search Type:</label>
+        <select class="form-control" id="searchType" name="searchType" required>
+            <option value="arrival">Arrival</option>
+            <option value="departure">Departure</option>
+        </select>
+    </div>
         <div class="form-group">
             <label for="Airport">Airport:</label>
             <input type="text" class="form-control" id="airport" name="airport" placeholder="Enter airport i.e. KJFK" required>
@@ -84,18 +87,10 @@
 <script>
 //Validation and formatting for the search form
 document.getElementById("searchForm").addEventListener("submit", function(event) {
- var searchTypeInput = document.getElementById("searchtype");
  var airportInput = document.getElementById("airport");
  var startInput = document.getElementById("start");
  var endInput = document.getElementById("end");
 
- // Validate Search Type
- var searchType = searchTypeInput.value.trim().toLowerCase();
- if (searchType !== "arrival" && searchType !== "departure") {
-     alert("Search Type must be either 'Arrival' or 'Departure'");
-     event.preventDefault();
-     return false;
- }
 
  // Validate Airport (4-letter ICAO code)
  var airportPattern = /^[A-Z]{4}$/;
@@ -128,15 +123,17 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
  }
 });
 
-//Function to redirect based on search type
-function redirectToPage(searchType) {
- searchType = searchType.toLowerCase();
- if (searchType === 'arrival' || searchType === 'departure') {
-     window.location.href = '/' + searchType + 's'; // Redirect to either arrivals or departures
- } else {
-     alert("Invalid search type");
- }
+function redirectToPage() {
+    var selectElement = document.getElementById("searchType");
+    var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+
+    if (selectedOption === 'arrival' || selectedOption === 'departure') {
+        window.location.href = '/' + selectedOption + 's'; // Redirect to either arrivals or departures
+    } else {
+        alert("Invalid search type");
+    }
 }
+
 </script>
 
 <!-- jQuery and Bootstrap JS -->

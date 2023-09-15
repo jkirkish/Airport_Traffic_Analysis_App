@@ -60,4 +60,9 @@ public class FlightArrivalsController {
         arrivalService.deleteArrival(id);
         return "redirect:/arrivals";
     }
+    @PostMapping("/arrivals/deleteAllArrivals")
+    public String deleteAllArrivals() {
+        arrivalService.deleteAllArrivals(); 
+        return "redirect:/departures"; 
+    }
 }

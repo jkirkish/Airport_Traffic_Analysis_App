@@ -41,4 +41,7 @@ public class DepartureService {
 	  public void deleteDeparture(Long id) {
 	        departuresRepository.deleteById(id);
 	    }
+	  public void deleteAllDepartures() {
+		  departuresRepository.deleteAll(); 
+	    }
 }

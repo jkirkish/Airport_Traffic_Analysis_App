@@ -63,6 +63,11 @@ public class FlightDeparturesController {
         departService.deleteDeparture(id);
         return "redirect:/departures"; 
     }
+    @PostMapping("/departures/deleteAll")
+    public String deleteAllDepartures() {
+        departService.deleteAllDepartures(); 
+        return "redirect:/departures"; 
+    }
 }
 
     

@@ -84,6 +84,10 @@
         <button type="button" class="btn btn-secondary" onclick="redirectToPage('departure')">Go to Departures</button>
     </form>
 </div>
+<div id="error-message" class="alert alert-danger" style="display: none;">
+		Error: Resource not found (404)
+</div>
+
 <script>
 //Validation and formatting for the search form
 document.getElementById("searchForm").addEventListener("submit", function(event) {
@@ -95,7 +99,7 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
  // Validate Airport (4-letter ICAO code)
  var airportPattern = /^[A-Z]{4}$/;
  if (!airportPattern.test(airportInput.value.trim())) {
-     alert("Airport must be a 4-letter ICAO code");
+     alert("Airport must be a 4-letter ICAO code all caps. Example KIAD aviationstack");
      event.preventDefault();
      return false;
  }
@@ -133,9 +137,39 @@ function redirectToPage() {
         alert("Invalid search type");
     }
 }
+</script>
+<script>
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+    // ... (your existing validation and form handling code)
+
+    fetch("/airportArrivalSearch", {
+        method: "POST",
+        body: new FormData(event.target),
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            if (response.status === 404) {
+                // Redirect to the custom error page
+                window.location.href = "/404error.html";
+                event.preventDefault(); // Prevent the form from submitting
+            } else {
+                // Handle other errors (optional)
+                console.error("HTTP error:", response.status, response.statusText);
+            }
+        } else {
+            // Process the successful response (if needed)
+        }
+    })
+    .catch(error => {
+        console.error("Fetch error:", error);
+    });
+});
 
 </script>
-
 <!-- jQuery and Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

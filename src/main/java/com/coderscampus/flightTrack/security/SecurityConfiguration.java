@@ -2,6 +2,7 @@ package com.coderscampus.flightTrack.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.coderscampus.flightTrack.repository.UserRepository;
@@ -62,6 +64,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/search/**").authenticated()
 					.requestMatchers("/deleteAllDepartureEntries").authenticated()
 					.requestMatchers("/deleteAllArrivals").authenticated()
+					.requestMatchers("/error").permitAll()
 					.requestMatchers("/api/v1/users/login").permitAll()
 					.requestMatchers("/api/v1/users//user/**").hasAnyRole("ADMIN","USER")
 					.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");

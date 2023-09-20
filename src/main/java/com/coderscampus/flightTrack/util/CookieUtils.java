@@ -1,6 +1,7 @@
 package com.coderscampus.flightTrack.util;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 public class CookieUtils {
@@ -20,5 +21,11 @@ public class CookieUtils {
         Cookie refreshTokenCookie = new Cookie(REFRESH_TOKEN_NAME, value);
         
         return refreshTokenCookie;
+    }
+    public static void deleteCookie(HttpServletResponse response, String cookieName) {
+        Cookie cookie = new Cookie(cookieName, "");
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // Set the max age to 0 to delete the cookie
+        response.addCookie(cookie);
     }
 }

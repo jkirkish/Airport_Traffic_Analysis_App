@@ -97,6 +97,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
                 loginTryCount++;
             }
+         // Check if the user has logged out (e.g., by accessing a logout URL)
+            if (request.getRequestURI().equals("/api/v1/users/logout")) {
+                // Invalidate the access token by removing it from the client's cookies
+                CookieUtils.deleteCookie(response, CookieUtils.ACCESS_TOKEN_NAME);
+            }
         }
         filterChain.doFilter(request, response);
     }

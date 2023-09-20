@@ -83,10 +83,14 @@ public class SecurityConfiguration {
 					login.successHandler(loginSuccessHandler);
 					login.permitAll();
 				})
-				.logout(logout ->{
-					logout.logoutSuccessUrl("/api/v1/users/login");
-					logout.logoutUrl("/api/v1/users/logout");
-				});
+				.logout(logout -> {
+		            logout
+		                .logoutUrl("/api/v1/users/logout") // Specify the logout URL
+		                .logoutSuccessUrl("/api/v1/users/login") // Redirect after logout
+		                .invalidateHttpSession(true) // Invalidate the HttpSession
+		                .deleteCookies("accessToken"); // Delete access token cookie
+		        });
+					
 
 		return http.build();
 	}

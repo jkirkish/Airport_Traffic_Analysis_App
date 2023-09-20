@@ -113,7 +113,38 @@ function redirectToPage(searchType) {
     }
 }
 </script>
+<script>
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+    // ... (your existing validation and form handling code)
 
+    fetch("/editSearch", {
+        method: "POST",
+        body: new FormData(event.target),
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            if (response.status === 404) {
+                // Redirect to the custom error page
+                window.location.href = "/404error.html";
+                event.preventDefault(); // Prevent the form from submitting
+            } else {
+                // Handle other errors (optional)
+                console.error("HTTP error:", response.status, response.statusText);
+            }
+        } else {
+            // Process the successful response (if needed)
+        }
+    })
+    .catch(error => {
+        console.error("Fetch error:", error);
+    });
+});
+
+</script>
 
 
 

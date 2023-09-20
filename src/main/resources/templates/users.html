@@ -30,39 +30,36 @@
       </ul>
     </div>
   </nav>
-<div class="container">
-    <h2>User List</h2>
-    <div class="table-responsive">
-        <div class="table">
-            <div class="thead">
-                <div class="row">
-                    <div class="col">ID</div>
-                    <div class="col">Username</div>
-                    <div class="col">Password</div>
-                    <div class="col">First Name</div>
-                    <div class="col">Last Name</div>
-                    <div class="col">Email</div>
-                    <div class="col">Phone</div>
-                    <div class="col">Registration Date</div>
-                </div>
-            </div>
-            <div class="tbody">
-                <div th:each="user : ${users}" class="row-with-border">
-                	<hr/>
-                    <div class="row">
-                        <div class="col"><a th:href="@{/api/v1/users/users/{id}(id=${user.id})}" type="text">[[${user.id}]]</a></div>
-                        <div class="col" th:text="${user.username}"></div>
-                        <div class="col" style="visibility:hidden;" th:text="${user.password}"></div>
-                        <div class="col" th:text="${user.firstName}"></div>
-                        <div class="col" th:text="${user.lastName}"></div>
-                        <div class="col" th:text="${user.email}"></div>
-                        <div class="col" th:text="${user.phone}"></div>
-                        <div class="col" th:text="${user.registrationDate}"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+  <h2>User List</h2>
+  <div class="table-responsive">
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Registration Date</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="user : ${users}" class="row-with-border">
+                  <td><a th:href="@{/api/v1/users/users/{id}(id=${user.id})}">[[${user.id}]]</a></td>
+                  <td th:text="${user.username}"></td>
+                  <td th:text="${user.password}"></td>
+                  <td th:text="${user.firstName}"></td>
+                  <td th:text="${user.lastName}"></td>
+                  <td th:text="${user.email}"></td>
+                  <td th:text="${user.phone}"></td>
+                  <td th:text="${user.registrationDate}"></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 </div>
 
 <!-- jQuery and Bootstrap JS -->

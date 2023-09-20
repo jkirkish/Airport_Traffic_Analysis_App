@@ -64,7 +64,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/search/**").authenticated()
 					.requestMatchers("/deleteAllDepartureEntries").authenticated()
 					.requestMatchers("/deleteAllArrivals").authenticated()
-					.requestMatchers("/error").permitAll()
+					.requestMatchers("/error").authenticated()
 					.requestMatchers("/api/v1/users/login").permitAll()
 					.requestMatchers("/api/v1/users/logout").authenticated()
 					.requestMatchers("/api/v1/users//user/**").hasAnyRole("ADMIN","USER")

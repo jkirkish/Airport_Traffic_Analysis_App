@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,9 @@ import com.coderscampus.flightTrack.service.JwtService;
 import com.coderscampus.flightTrack.service.RefreshTokenService;
 import com.coderscampus.flightTrack.service.RoleService;
 import com.coderscampus.flightTrack.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 //@RestController
 @Controller
@@ -89,6 +93,14 @@ public class UserController {
 		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
 		return "register";
 	}
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+	  
+	    SecurityContextHolder.clearContext();
+	    ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/login"));
+	    return modelAndView;
+	}
+
 
 	@PostMapping("/users/{userId}")
 	public String postOneUser(User user) {

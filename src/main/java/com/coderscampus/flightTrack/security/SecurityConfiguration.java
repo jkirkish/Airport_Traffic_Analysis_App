@@ -66,6 +66,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/deleteAllArrivals").authenticated()
 					.requestMatchers("/error").permitAll()
 					.requestMatchers("/api/v1/users/login").permitAll()
+					.requestMatchers("/api/v1/users/logout").authenticated()
 					.requestMatchers("/api/v1/users//user/**").hasAnyRole("ADMIN","USER")
 					.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");
 			        
@@ -81,6 +82,10 @@ public class SecurityConfiguration {
 					login.failureUrl("/api/v1/users/login-error");
 					login.successHandler(loginSuccessHandler);
 					login.permitAll();
+				})
+				.logout(logout ->{
+					logout.logoutSuccessUrl("/api/v1/users/login");
+					logout.logoutUrl("/api/v1/users/logout");
 				});
 
 		return http.build();

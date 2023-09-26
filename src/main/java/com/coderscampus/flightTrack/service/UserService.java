@@ -34,10 +34,6 @@ public class UserService implements UserDetailsService{
 		return userRepo.findByPassword(password);
 	}
 
-	public List<User> findByPhone(String phone) {
-		return userRepo.findByphone(phone);
-	}
-
 	public List<User> firstNameAndUsername(String firstName, String username) {
 		return userRepo.findByfirstNameAndUsername(firstName, username);
 	}
@@ -48,7 +44,7 @@ public class UserService implements UserDetailsService{
 
 	public User findById(Integer userId) {
 		Optional<User> userOpt = userRepo.findById(userId);
-		return userOpt.orElse(new User(userId, null, null, null, null, null, null, null, null,null));
+		return userOpt.orElse(new User(userId, null, null, null, null, null, null, null,null));
 	}
 
 	public List<User> findAll() {

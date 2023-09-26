@@ -8,31 +8,81 @@
         <style>
     /* Background image styles */
     body {
-    		
-			
-			font-family: Arial, sans-serif;
-				
+      font-family: Arial, sans-serif;
     }
     .navbar-brand,
     .navbar-nav .nav-link {
       color: white !important; 
     }
-    
-   
     label {
       color: black; 
     }
-    
- 
     input {
       color: black;
     }
-    
-    
     .btn-primary {
       color: white; 
     }
+    .highlight-label {
+    	  color: black;
+    	  text-shadow: 0 0 10px yellow;
+    	}
+    body {
+        background-image: url("https://picsum.photos/1200/800");
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+      }
+    .navbar-brand {
+        font-weight: bold; /* Make the text bold */
+        color: yellow; /* Text color */
+        border-radius: 10px; /* Rounded borders */
+        padding: 5px 10px; /* Add some padding for spacing */
+        background-color: rgba(0, 0, 0, 0.5); /* Background color with opacity */
+       
+      }
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.9); 
+        border: 2px solid yellow;
+        padding: 20px; 
+      }
+    h1 {
+        text-align: center; /* Center the text */
+        color: orange; /* Text color */
+        text-shadow: 0 0 10px rgba(255, 165, 0, 0.8); /* Orange glow */
+        text-decoration: underline; /* Underline */
+      }
+    .navbar-nav .nav-link {
+        font-weight: bold; /* Make the text bold */
+        color: lightblue; /* Text color */
+        border-radius: 10px; /* Rounded borders */
+      }
   </style>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get a reference to the registration form and the registrationDate field
+    var registrationForm = document.getElementById("registrationForm");
+    var registrationDateField = registrationForm.querySelector("input[name='registrationDate']");
+
+    // Function to set the current date
+    function setCurrentDate() {
+      var currentDate = new Date();
+      var formattedDate = currentDate.toISOString().split("T")[0]; // Get YYYY-MM-DD format
+
+      // Set the current date to the registrationDate field
+      registrationDateField.value = formattedDate;
+
+      // Manually submit the form
+      registrationForm.submit();
+    }
+
+    // Add an event listener to the Register button
+    var registrationDateField = registrationForm.querySelector("input[name='registrationDate']");
+    registerButton.addEventListener("click", function (event) {
+      setCurrentDate();
+    });
+  });
+  </script>
 </head>
 <body>
 <div class="container">
@@ -49,48 +99,57 @@
       </ul>
     </div>
   </nav>
+  <div class="form-container">
   <h1>Registration Form</h1>
-  <form action="/api/v1/users/register" method="post">
-
+  <form id="registrationForm" action="/api/v1/users/register" method="post">
     <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" name="username" th:field="${user.username}" required>
+      <label class="highlight-label" for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" th:field="${user.username}">
     </div>
-
     <div class="form-group">
-      <label for="password">Password</label>
+      <label class="highlight-label" for="password">Password</label>
       <input type="password" class="form-control" id="password" name="password" th:field="${user.password}" required>
     </div>
-
     <div class="form-group">
-      <label for="firstName">First Name</label>
+      <label class="highlight-label" for="firstName">First Name</label>
       <input type="text" class="form-control" id="firstName" name="firstName" th:field="${user.firstName}" required>
     </div>
-
     <div class="form-group">
-      <label for="lastName">Last Name</label>
+      <label class="highlight-label" for="lastName">Last Name</label>
       <input type="text" class="form-control" id="lastName" name="lastName" th:field="${user.lastName}" required>
     </div>
-
     <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="janeDoe@hotmail.com" name="email" th:field="${user.email}" required>
+      <label class="highlight-label" for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="username@hotmail.com" name="email" th:field="${user.email}" required>
     </div>
-
     <div class="form-group">
-      <label for="phone">Phone Number</label>
-      <input type="tel" class="form-control" id="phone" placeholder="(XXX)XXX-XXXX"  name="phone" th:field="${user.phone}" required>
-    </div>
-
-    <div class="form-group">
-      <label for="registrationDate">Registration Date</label>
-      <input type="date" class="form-control" name="registrationDate" th:field="${user.registrationDate}" required>
+     <label class="highlight-label" for="registrationDate">Registration Date</label>
+     <input type="date" class="form-control" name="registrationDate" id="registrationDate" required>
     </div>
     
-          <button type="submit" class="btn btn-primary">Register</button>
-          <div style="margin-top: 50px;"></div>
-    </form>
+    <button type="submit" class="btn btn-primary">Register</button>
+    <div style="margin-top: 50px;"></div>
+  </form>
+  </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Get a reference to the "Registration Date" input field
+  var registrationDateField = document.getElementById("registrationDate");
+
+  // Function to set the current date
+  function setCurrentDate() {
+    var currentDate = new Date();
+    var formattedDate = currentDate.toISOString().split("T")[0]; // Get YYYY-MM-DD format
+
+    // Set the current date to the "Registration Date" field
+    registrationDateField.value = formattedDate;
+  }
+
+  // Call the setCurrentDate function to set the initial value
+  setCurrentDate();
+});
+</script>
 
 </body>
 </html>

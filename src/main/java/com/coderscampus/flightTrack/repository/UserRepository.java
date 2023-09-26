@@ -27,9 +27,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	//select * from email where email = : email
 	List<User>findByEmail(String email);
 	
-	//select * from phone where phone = : phone
-	List<User>findByphone(String phone);
-	
 	//select * from users where firstname = : name and username = :username
 	List<User>findByfirstNameAndUsername(String firstName, String username);
 	

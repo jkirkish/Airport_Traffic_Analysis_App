@@ -33,7 +33,6 @@ public class User implements UserDetails{
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String phone;
 	private LocalDate registrationDate;
 	private Address address;
 	private Boolean accountNonExpired;
@@ -53,7 +52,7 @@ public class User implements UserDetails{
 	}
 	
 	public User(Integer id, String username, String password, String firstName, String lastName, String email,
-			String phone, LocalDate registrationDate, Address address,Set<Role>authorities) {
+			 LocalDate registrationDate, Address address,Set<Role>authorities) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -61,7 +60,6 @@ public class User implements UserDetails{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.phone = phone;
 		this.registrationDate = registrationDate;
 		this.address = address;
 		this.authorities = authorities;		
@@ -107,12 +105,6 @@ public class User implements UserDetails{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
@@ -133,7 +125,7 @@ public class User implements UserDetails{
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", registrationDate="
+				+ ", lastName=" + lastName + ", email=" + email +  ", registrationDate="
 				+ registrationDate + ", address=" + address + "]";
 	}
 	@Override

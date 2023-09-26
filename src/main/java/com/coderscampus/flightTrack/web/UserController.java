@@ -62,13 +62,13 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String getLoginPage(ModelMap model) {
-		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
+		model.put("user", new User(null, null, null, null, null, null, null, null,null));
 		return "login";
 	}
 
 	@GetMapping("/login-error")
 	public String getError(ModelMap model) {
-		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
+		model.put("user", new User(null, null, null, null, null, null, null, null,null));
 		model.put("loginError", true);
 		return "login";
 	}
@@ -90,7 +90,7 @@ public class UserController {
 
 	@GetMapping("/register")
 	public String getTheUser(ModelMap model) {
-		model.put("user", new User(null, null, null, null, null, null, null, null, null,null));
+		model.put("user", new User(null, null, null, null, null, null, null, null,null));
 		return "register";
 	}
 	@GetMapping("/logout")

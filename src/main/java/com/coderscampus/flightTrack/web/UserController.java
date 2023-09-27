@@ -146,7 +146,7 @@ public class UserController {
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(loggedInUser.getId());
 
         // You can add any necessary attributes to the model here if needed
-        ModelAndView modelAndView = new ModelAndView(new RedirectView("/api/v1/users/index"));
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("/airportArrivalSearch"));
 
         return modelAndView;
     }

@@ -43,35 +43,35 @@
                 <td><span th:text="${departure.id}" data-departure-id="${departure.id}"></span></td>
             </tr>
             <tr>
-                <th>ICAO24</th>
+            <th  title="Unique ICAO 24-bit address of the transponder in hex string representation.">ICAO24</th>
                 <td><span th:text="${departure.icao24}"></span></td>
             </tr>
             <tr>
-                <th>First Seen(Human Readable Date)</th>
+                <th title="Unix timestamp (seconds)translated to human readable date format for the last position update. Can be null if no position report was received by OpenSky within the past 15s.">First Seen(Human Readable Date)</th>
                 <td><span th:text="${firstSeenFormatted}"></span></td>
             </tr>
             <tr>
-                <th>Est. Departure Airport</th>
+                <th title="Four letter ICAO airport aircraft departed from">Est. Departure Airport</th>
                 <td><span th:text="${departure.estDepartureAirport}"></span></td>
             </tr>
             <tr>
-                <th>Last Seen(Human Readable Date)</th>
+                <th title="Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.">Last Seen(Human Readable Date)</th>
                 <td><span th:text="${lastSeenFormatted}"></span></td>
             </tr>
             <tr>
-                <th>Call Sign</th>
+                <th title="Callsign of the vehicle (8 chars). Can be null if no callsign has been received.">Call Sign</th>
                 <td><span th:text="${departure.callSign}"></span></td>
             </tr>
             <tr>
-                <th>Est. Departure Airport Horiz. Distance</th>
+                <th title="Lateral distance away from the departure airport ">Est. Departure Airport Horiz. Distance</th>
                 <td><span th:text="${departure.estDepartureAirportHorizDistance}"></span></td>
             </tr>
             <tr>
-                <th>Est. Departure Airport Vert. Distance</th>
+                <th title="Vertical distance above the airport">Est. Departure Airport Vert. Distance</th>
                 <td><span th:text="${departure.estDepartureAirportVertDistance}"></span></td>
             </tr>
             <tr>
-                <th>Departure Airport Candidates Count</th>
+                <th title="Departure airport candidates">Departure Airport Candidates Count</th>
                 <td><span th:text="${departure.departureAirportCandidatesCount}"></span></td>
             </tr>
             </tbody>
@@ -111,5 +111,6 @@ function deleteDeparture() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/departure.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

@@ -43,35 +43,35 @@
                 <td><span th:text="${arrival.id}" data-arrival-id="${arrival.id}"></span></td>
             </tr>
             <tr>
-                <th>ICAO24</th>
+                <th title="Unique ICAO 24-bit address of the transponder in hex string representation.">ICAO24</th>
                 <td><span th:text="${arrival.icao24}"></span></td>
             </tr>
             <tr>
-                <th>First Seen(Human Readable Date)</th>
+                <th title="Unix timestamp (seconds)translated to human readable date format for the last position update. Can be null if no position report was received by OpenSky within the past 15s.">First Seen(Human Readable Date)</th>
                 <td><span th:text="${firstSeenFormatted}"></span></td>
             </tr>
             <tr>
-                <th>Est. Arrival Airport</th>
+                <th title="Four letter ICAO airport aircraft departed from">Est. Arrival Airport</th>
                 <td><span th:text="${arrival.estArrivalAirport}"></span></td>
             </tr>
             <tr>
-                <th>Last Seen(Human Readable Date)</th>
+                <th title="Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.">Last Seen(Human Readable Date)</th>
                 <td><span th:text="${lastSeenFormatted}"></span></td>
             </tr>
             <tr>
-                <th>Call Sign</th>
+                <th title="Callsign of the vehicle (8 chars). Can be null if no callsign has been received.">Call Sign</th>
                 <td><span th:text="${arrival.callSign}"></span></td>
                 </tr>
                 <tr>
-                    <th>Est. Arrival Airport Horiz. Distance</th>
+                    <th title="Lateral distance away from the departure airport ">Est. Arrival Airport Horiz. Distance</th>
                     <td><span th:text="${arrival.estArrivalAirportHorizDistance}"></span></td>
                 </tr>
                 <tr>
-                    <th>Est. Arrival Airport Vert. Distance</th>
+                    <th title="Vertical distance above the airport"> Est. Arrival Airport Vert. Distance</th>
                     <td><span th:text="${arrival.estArrivalAirportVertDistance}"></span></td>
                 </tr>
                 <tr>
-                    <th>Arrival Airport Candidates Count</th>
+                    <th title="Departure airport candidates">Arrival Airport Candidates Count</th>
                     <td><span th:text="${arrival.arrivalAirportCandidatesCount}"></span></td>
                 </tr>
                 </tbody>

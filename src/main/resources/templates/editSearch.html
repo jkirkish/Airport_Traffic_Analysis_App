@@ -64,18 +64,14 @@
 
 <script>
 document.getElementById("searchForm").addEventListener("submit", function(event) {
-    var searchTypeInput = document.getElementById("searchtype");
     var airportInput = document.getElementById("airport");
     var startInput = document.getElementById("start");
     var endInput = document.getElementById("end");
 
-    // Validate Search Type
-  
-
     // Validate Airport (4-letter ICAO code)
     var airportPattern = /^[A-Z]{4}$/;
     if (!airportPattern.test(airportInput.value.trim())) {
-        alert("Airport must be a 4-letter ICAO code");
+        alert("Airport must be a 4-letter ICAO code all in uppercase.");
         event.preventDefault();
         return false;
     }
@@ -87,9 +83,17 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         event.preventDefault();
         return false;
     }
+
     // Convert start and end times to Date objects for comparison
     var startDate = new Date(startInput.value);
     var endDate = new Date(endInput.value);
+
+    // Check if the end date is before the start date
+    if (endDate <= startDate) {
+        alert("End Time must be after Start Time.");
+        event.preventDefault();
+        return false;
+    }
 
     // Calculate the time difference in milliseconds
     var timeDifference = endDate - startDate;
@@ -97,7 +101,7 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
 
     // Check if the time interval is more than 7 days
     if (daysDifference > 7) {
-        alert("Time interval must not be more than 7 days apart");
+        alert("Time interval must not be more than 7 days apart.");
         event.preventDefault();
         return false;
     }

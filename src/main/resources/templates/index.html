@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>My Website</title>
+  <title>Index page</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <!-- Bootstrap JS -->
@@ -51,6 +51,23 @@
         opacity: 0.5;
       }
     }
+    /* Styling for the video container */
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden; /* Hide overflow for smaller screens */
+    }
+
+    /* Style the video to cover the container */
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 
@@ -73,12 +90,25 @@
         <li class="nav-item">
            <a class="nav-link" href="/api/v1/users/logout">Logout</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/arrivalSearchRequests">SearchRequests</a>
+        </li>
+        <li class="nav-item">
+		  <a class="nav-link" href="/arrivals">Arrivals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/departures">Departures</a>
+        </li>
       </ul>
     </div>
   </nav>
-
+  <div class="video-container">
+  <video autoplay loop muted playsinline>
+    <source src="\images\\pexels_videos_4105.mp4" type="video/mp4">
+  </video>
+</div>
   <div class="centered-heading" style="background: grey;"> <!-- Add grey background -->
-    <h1 class="highlight" style="border: 2px solid grey;">WELCOME TO FLIGHT TRACKING</h1> <!-- Add border -->
+    <h1 class="highlight" style="border: 2px solid grey;">WELCOME TO FLIGHT TRACKING</h1> 
   </div>
 
   <!-- Initialize Bootstrap tooltips -->

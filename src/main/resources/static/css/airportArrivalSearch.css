@@ -1,0 +1,21 @@
+
+.container {
+	margin-top: 50px;
+}
+/* Additional styles for red text in <p> tags */
+p {
+	color: red;
+}
+/* Additional styles for bold labels */
+label {
+	font-weight: bold;
+}
+
+
+/* Background image styles */
+body {
+	background-color: white;
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: Arial, sans-serif;
+}

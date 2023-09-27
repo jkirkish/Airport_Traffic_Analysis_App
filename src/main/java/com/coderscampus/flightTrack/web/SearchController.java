@@ -60,9 +60,18 @@ public class SearchController {
 	
 	@PostMapping("/airportArrivalSearch")
 	public String saveSearch(Search search) throws Exception {
+		String url = null;
 		searchService.save(search);
+		String type = search.getSearchType();
+		System.out.println( "type is " + search.getSearchType());
+		if(type.equals("arrival"))
+		  {
+			 url = "arrivals";
+		  }else {
+			  url = "departures";
+		  }
 		searchService.initiateSearch(search);
-		return "redirect:/airportArrivalSearch";
+		return "redirect:/" + url;
 	}
 
 			

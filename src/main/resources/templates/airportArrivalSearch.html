@@ -5,7 +5,7 @@
     <title>Airport Arrival Search Form</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./static/css/airportArrivalSearch.css">
+    <link rel="stylesheet" type = "text/css"  href="airportArrivalSearch.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,10 +56,8 @@
     		<p>The given time interval must not be larger than seven days!</p>
     	<div>
         <button type="submit" class="btn btn-primary">Search</button>
-        <!-- Button to redirect to Arrivals -->
-        <button type="button" class="btn btn-secondary" onclick="redirectToPage('arrival')">Go to Arrivals</button>
-        <!-- Button to redirect to Departures -->
-        <button type="button" class="btn btn-secondary" onclick="redirectToPage('departure')">Go to Departures</button>
+        
+        
     </form>
 </div>
 <div id="error-message" class="alert alert-danger" style="display: none;">
@@ -110,17 +108,6 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         return false;
     }
 });
-
-function redirectToPage() {
-    var selectElement = document.getElementById("searchType");
-    var selectedOption = selectElement.options[selectElement.selectedIndex].value;
-
-    if (selectedOption === 'arrival' || selectedOption === 'departure') {
-        window.location.href = '/' + selectedOption + 's'; // Redirect to either arrivals or departures
-    } else {
-        alert("Invalid search type");
-    }
-}
 
 </script>
 <script>

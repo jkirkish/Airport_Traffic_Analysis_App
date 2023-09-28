@@ -66,6 +66,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/deleteAllArrivals").hasRole("ADMIN")
 					.requestMatchers("/404error").permitAll()
 					.requestMatchers("/api/v1/users/login").permitAll()
+					.requestMatchers("/css/**", "/images/**", "/js/**").permitAll()
 					.requestMatchers("/api/v1/users/logout").authenticated()
 					.requestMatchers("/api/v1/users//user/**").hasAnyRole("ADMIN","USER")
 					.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");

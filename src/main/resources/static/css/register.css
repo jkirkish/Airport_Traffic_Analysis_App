@@ -1,0 +1,53 @@
+  
+    /* Background image styles */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: white !important; 
+    }
+    label {
+      color: black; 
+    }
+    input {
+      color: black;
+    }
+    .btn-primary {
+      color: white; 
+    }
+    .highlight-label {
+    	  color: black;
+    	  text-shadow: 0 0 10px yellow;
+    	}
+    body {
+        background-image: url("https://picsum.photos/1200/800");
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+      }
+    .navbar-brand {
+        font-weight: bold; /* Make the text bold */
+        color: yellow; /* Text color */
+        border-radius: 10px; /* Rounded borders */
+        padding: 5px 10px; /* Add some padding for spacing */
+        background-color: rgba(0, 0, 0, 0.5); /* Background color with opacity */
+       
+      }
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.9); 
+        border: 2px solid yellow;
+        padding: 20px; 
+      }
+    h1 {
+        text-align: center; /* Center the text */
+        color: orange; /* Text color */
+        text-shadow: 0 0 10px rgba(255, 165, 0, 0.8); /* Orange glow */
+        text-decoration: underline; /* Underline */
+      }
+    .navbar-nav .nav-link {
+        font-weight: bold; /* Make the text bold */
+        color: lightblue; /* Text color */
+        border-radius: 10px; /* Rounded borders */
+      }
+  

@@ -1,0 +1,23 @@
+
+        .row-with-border {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        .navbar-nav .nav-link {
+            font-weight: bold; /* Make the text bold */
+            color: lightblue; /* Text color */
+            border-radius: 10px; /* Rounded borders */
+          }
+        .navbar-brand {
+            font-weight: bold; /* Make the text bold */
+            color: yellow; /* Text color */
+            border-radius: 10px; /* Rounded borders */
+            padding: 5px 10px; /* Add some padding for spacing */
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with opacity */
+           
+          }
+        .navbar-brand,
+        .navbar-nav .nav-link {
+          color: white !important; 
+        }
+    

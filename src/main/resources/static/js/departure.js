@@ -1,3 +1,4 @@
+
 function goToDeparturesPage() {
     window.location.href = "/departures";
 }

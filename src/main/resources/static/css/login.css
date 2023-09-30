@@ -19,12 +19,14 @@ h1 {
 	text-align: center;
 	padding: 10px;
 	display: block;
+	text-shadow: 0 0 10px rgba(255, 165, 0, 0.8); /* Orange glow */
 	animation: glow 2s infinite alternate;
-	color: rgba(0, 0, 0, 0.8); /* Set text color to black */
+	color: orange; 
 	text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 	border: 2px dotted rgba(255, 255, 255, 0.8);
 	padding: 10px;
 	border-bottom: 2px solid rgba(0, 0, 0, 0.8); /* Add a solid underline */
+	text-decoration: underline; /* Underline */
 }
 
 /* Custom input field width */
@@ -53,10 +55,5 @@ h1 {
 .error {
 	color: red;
 }
-h1 {
-	text-align: center; /* Center the text */
-	color: orange; /* Text color */
-	text-shadow: 0 0 10px rgba(255, 165, 0, 0.8); /* Orange glow */
-	text-decoration: underline; /* Underline */
-}
+
 

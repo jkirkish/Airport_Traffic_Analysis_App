@@ -5,31 +5,7 @@
   <title>Registration Form</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Get a reference to the registration form and the registrationDate field
-    var registrationForm = document.getElementById("registrationForm");
-    var registrationDateField = registrationForm.querySelector("input[name='registrationDate']");
-
-    // Function to set the current date
-    function setCurrentDate() {
-      var currentDate = new Date();
-      var formattedDate = currentDate.toISOString().split("T")[0]; // Get YYYY-MM-DD format
-
-      // Set the current date to the registrationDate field
-      registrationDateField.value = formattedDate;
-
-      // Manually submit the form
-      registrationForm.submit();
-    }
-
-    // Add an event listener to the Register button
-    var registrationDateField = registrationForm.querySelector("input[name='registrationDate']");
-    registerButton.addEventListener("click", function (event) {
-      setCurrentDate();
-    });
-  });
-  </script>
+  
   <link rel="stylesheet" type="text/css"  href="/css/register.css">
 </head>
 <body>
@@ -80,24 +56,7 @@
   </form>
   </div>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Get a reference to the "Registration Date" input field
-  var registrationDateField = document.getElementById("registrationDate");
 
-  // Function to set the current date
-  function setCurrentDate() {
-    var currentDate = new Date();
-    var formattedDate = currentDate.toISOString().split("T")[0]; // Get YYYY-MM-DD format
-
-    // Set the current date to the "Registration Date" field
-    registrationDateField.value = formattedDate;
-  }
-
-  // Call the setCurrentDate function to set the initial value
-  setCurrentDate();
-});
-</script>
-
+<script src="/js/register.js" type="text/javascript"></script>
 </body>
 </html>

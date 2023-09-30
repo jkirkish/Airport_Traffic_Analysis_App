@@ -75,32 +75,8 @@
         <button type="button" onclick="goToDeparturesPage()">Back</button>
     </form>
 </div>
-<script>
-function goToDeparturesPage() {
-    window.location.href = "/departures";
-}
 
-function deleteDeparture() {
-    // Retrieve the departure ID
-    var departureId = document.querySelector('span[data-departure-id]').innerText;
-
-    // Perform an AJAX request to delete the departure
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/departures/delete/" + departureId, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function () {
-        // Handle the response from the server
-        if (xhr.status === 200) {
-            alert("Departure deleted successfully!");
-            // Redirect to the departures page
-            window.location.href = "/departures";
-        } else {
-            alert("Failed to delete departure. Please try again.");
-        }
-    };
-    xhr.send();
-}
-</script>
+<script src="/js/departure.js" type="text/javascript"></script>
 <!-- jQuery and Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

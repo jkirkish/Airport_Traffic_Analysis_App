@@ -1,58 +1,13 @@
-// JavaScript code for saving changes and confirming deletion
-function saveChanges() {
-    if (confirm("Are you sure you want to save changes?")) {
-        var formData = new FormData(document.getElementById("editForm"));
-        var searchId = document.querySelector('input[name="id"]').value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/search/save/" + searchId, true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert("Changes saved successfully!");
-                // Optionally perform additional actions after saving changes
-            } else {
-                alert("Failed to save changes. Please try again.");
-            }
-        };
-        xhr.send(formData);
-    }
-}
-
-function confirmDelete() {
-    if (confirm("Are you sure you want to delete this search?")) {
-        var searchId = document.querySelector('input[name="id"]').value;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/search/delete/" + searchId, true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert("Search deleted successfully!");
-                // Optionally perform additional actions after deleting the search
-            } else {
-                alert("Failed to delete search. Please try again.");
-            }
-        };
-        xhr.send();
-    }
-}
 
 document.getElementById("searchForm").addEventListener("submit", function(event) {
-    var searchTypeInput = document.getElementById("searchtype");
     var airportInput = document.getElementById("airport");
     var startInput = document.getElementById("start");
     var endInput = document.getElementById("end");
 
-    // Validate Search Type
-    var searchType = searchTypeInput.value.trim().toLowerCase();
-    if (searchType !== "arrival" && searchType !== "departure") {
-        alert("Search Type must be either 'Arrival' or 'Departure'");
-        event.preventDefault();
-        return false;
-    }
-
     // Validate Airport (4-letter ICAO code)
     var airportPattern = /^[A-Z]{4}$/;
     if (!airportPattern.test(airportInput.value.trim())) {
-        alert("Airport must be a 4-letter ICAO code");
+        alert("Airport must be a 4-letter ICAO code all in uppercase.");
         event.preventDefault();
         return false;
     }
@@ -64,9 +19,17 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         event.preventDefault();
         return false;
     }
+
     // Convert start and end times to Date objects for comparison
     var startDate = new Date(startInput.value);
     var endDate = new Date(endInput.value);
+
+    // Check if the end date is before the start date
+    if (endDate <= startDate) {
+        alert("End Time must be after Start Time.");
+        event.preventDefault();
+        return false;
+    }
 
     // Calculate the time difference in milliseconds
     var timeDifference = endDate - startDate;
@@ -74,7 +37,7 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
 
     // Check if the time interval is more than 7 days
     if (daysDifference > 7) {
-        alert("Time interval must not be more than 7 days apart");
+        alert("Time interval must not be more than 7 days apart.");
         event.preventDefault();
         return false;
     }
@@ -89,4 +52,33 @@ function redirectToPage(searchType) {
         alert("Invalid search type");
     }
 }
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+    // ... (your existing validation and form handling code)
+
+    fetch("/editSearch", {
+        method: "POST",
+        body: new FormData(event.target),
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            if (response.status === 404) {
+                // Redirect to the custom error page
+                window.location.href = "/404error.html";
+                event.preventDefault(); // Prevent the form from submitting
+            } else {
+                // Handle other errors (optional)
+                console.error("HTTP error:", response.status, response.statusText);
+            }
+        } else {
+            // Process the successful response (if needed)
+        }
+    })
+    .catch(error => {
+        console.error("Fetch error:", error);
+    });
+});
 

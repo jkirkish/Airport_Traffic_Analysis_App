@@ -1,6 +1,9 @@
 
 .container {
-	margin-top: 50px;
+	background-color: rgba(255, 255, 255, 0.9); /* Light background color */
+	border: 1px solid #ccc; /* Light border around the container */
+	padding: 20px; /* Add some padding to the container */
+	border-radius: 5px; /* Add rounded corners to the container */
 }
 /* Additional styles for red text in <p> tags */
 p {
@@ -14,10 +17,11 @@ label {
 
 /* Background image styles */
 body {
-	background-color: white;
+	font-family: Arial, sans-serif;
+	background-image: url("https://picsum.photos/1200/800");
 	background-size: cover;
 	background-repeat: no-repeat;
-	font-family: Arial, sans-serif;
+	height: 100vh; /* Set height to 100vh to cover the entire viewport height */
 }
 .navbar-nav .nav-link {
     font-weight: bold; /* Make the text bold */
@@ -35,4 +39,17 @@ body {
 .navbar-brand,
 .navbar-nav .nav-link {
   color: white !important; 
+}
+h1 {
+	text-align: center;
+	padding: 10px;
+	display: block;
+	text-shadow: 0 0 10px rgba(255, 165, 0, 0.8); /* Orange glow */
+	animation: glow 2s infinite alternate;
+	color: orange; 
+	text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+	border: 2px dotted rgba(255, 255, 255, 0.8);
+	padding: 10px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.8); /* Add a solid underline */
+	text-decoration: underline; /* Underline */
 }

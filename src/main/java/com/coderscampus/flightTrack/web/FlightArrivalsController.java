@@ -63,6 +63,6 @@ public class FlightArrivalsController {
     @PostMapping("/arrivals/deleteAllArrivals")
     public String deleteAllArrivals() {
         arrivalService.deleteAllArrivals(); 
-        return "redirect:/departures"; 
+        return "redirect:/arrivals"; 
     }
 }

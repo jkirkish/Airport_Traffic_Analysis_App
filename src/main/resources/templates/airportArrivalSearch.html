@@ -17,9 +17,6 @@
                 <a class="nav-link" href="/api/v1/users/index">Index</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/arrivalSearchRequests">SearchRequests</a>
-            </li>
-            <li class="nav-item">
     			<a class="nav-link" href="/arrivals">Arrivals</a>
     	    </li>
             <li class="nav-item">
@@ -42,16 +39,18 @@
             <label for="Airport">Airport:</label>
             <input type="text" class="form-control" id="airport" name="airport" placeholder="Enter airport i.e. KJFK" required>
         </div>
-        <div class="form-group">
-            <label for="start">Start Time:</label>
-            <input type="text" class="form-control" id="start" name="startDate" placeholder="Enter begin date time MM-dd-yyyy HH:mm:ss" required>
-            <p>I.E. 07-14-2023 17:23:45</p>
-        </div>
-        <div class="form-group">
-            <label for="end">End Time:</label>
-            <input type="text" class="form-control" id="end" name="endDate" placeholder="Enter end date time MM-dd-yyyy HH:mm:ss" required>
-            <p>I.E. 07-14-2023 17:23:45</p>
-        </div>
+        
+   <div class="form-group">
+      <label for="startTime">Start Time:</label>
+      <input type="datetime-local" class="form-control" id="startTime" name="startTime" required>
+    </div>
+
+    
+      <div class="form-group">
+      <label for="endTime">End Time:</label>
+      <input type="datetime-local" class="form-control" id="endTime" name="endTime" required>
+    </div>
+    
         <div>
     		<p>The given time interval must not be larger than seven days!</p>
     	<div>
@@ -63,7 +62,9 @@
 <div id="error-message" class="alert alert-danger" style="display: none;">
 		Error: Resource not found (404)
 </div>
-
+	<div class="progress" style="display: none;">
+	<div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+</div>
 
 
 <!-- jQuery and Bootstrap JS -->

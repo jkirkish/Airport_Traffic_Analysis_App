@@ -53,13 +53,14 @@
             <label for="endDate">End Date:</label>
             <input type="text" class="form-control" id="endDate" name="endDate" th:value="${search.endDate}">
         </div>
-        <div class="btn-group my-4"> 
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-    </form>
-    <form th:action="@{/search/delete/{id}(id=${search.id})}" method="post">
-          <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+        <div class="btn-group my-4" style="display: flex; width: 10px">
+        <button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">Update</button>
+      
+    </div>
+</form>
+<form th:action="@{'/search/delete/' + ${search.id}}" method="post">
+<button type="submit" class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
+</form>
 </div>
 
 

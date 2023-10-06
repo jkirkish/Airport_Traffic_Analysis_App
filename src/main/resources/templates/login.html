@@ -2,36 +2,36 @@
 <html xmlns:th="http://thymeleaf.org">
 
 <head>
-<title>Login</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css"  href="/css/login.css">
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css"  href="/css/login.css">
 </head>
 
 <body>
-</nav>
-	<div class="container mt-3">
-		<p>If you have not registered, click on the register link.</p>
-		<a class="nav-link" href="/api/v1/users/register" style="text-decoration: underline; font-size: 20px; color: black;">Register</a>
-		<h1>Sign In Page</h1>
-		<p th:if="${loginError}" class="error">Wrong username or password</p>
-		<form th:action="@{/api/v1/users/login}" method="post">
-	<div class="mb-3 mt-3 row" style="color: white;">
-		<label for="username" class="custom-label col-4">Username:</label>
-		<input type="text" class="form-control narrow-input col-8" id="username" autofocus="autofocus"
-		placeholder="Enter username" name="username" th:field="${user.username}">
-   </div>
-   <div class="mb-3 row" style="color: white;">
-        <label for="pwd" class="custom-label col-4">Password:</label>
-        <input type="password" class="form-control narrow-input col-8" id="pwd" autofocus="autofocus"
-        placeholder="Enter password" name="password" th:field="${user.password}">
-   </div>
-     <button type="submit" class="btn btn-primary col-3 mx-auto rounded-pill">Login</button>
-  </form>
-</div>
-
+    <div class="container mt-3">
+        <p>If you have not registered, click on the register link.</p>
+        <a class="nav-link" href="/api/v1/users/register" style="text-decoration: underline; font-size: 20px; color: black;">Register</a>
+        <h1>Sign In Page</h1>
+        <p th:if="${loginError}" class="error">Wrong username or password</p>
+        <form th:action="@{/api/v1/users/login}" method="post">
+            <div class="mb-3 mt-3 row" style="color: white;">
+                <label for="username" class="custom-label col-md-4">Username:</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control narrow-input" id="username" autofocus="autofocus" placeholder="Enter username" name="username" th:field="${user.username}">
+                </div>
+            </div>
+            <div class="mb-3 row" style="color: white;">
+                <label for="pwd" class="custom-label col-md-4">Password:</label>
+                <div class="col-md-8">
+                    <input type="password" class="form-control narrow-input" id="pwd" autofocus="autofocus" placeholder="Enter password" name="password" th:field="${user.password}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary col-3 mx-auto rounded-pill">Login</button>
+        </form>
+    </div>
 </body>
 
 </html>

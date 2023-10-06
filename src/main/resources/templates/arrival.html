@@ -30,7 +30,7 @@
     </div>
 </nav>
 <div class="container">
-    <h2>Arrival Details</h2>
+    <h1>Arrival Details</h1>
     <form id="arrivalForm">
         <table class="table table-bordered">
             <tbody>
@@ -39,15 +39,15 @@
                 <td><span th:text="${arrival.id}" data-arrival-id="${arrival.id}"></span></td>
             </tr>
             <tr>
-                <th title="Unique ICAO 24-bit address of the transponder in hex string representation.">ICAO24</th>
+                <th title="Unique ICAO 24-bit address of the transponder in hex string representation.All letters are lower case">ICAO24</th>
                 <td><span th:text="${arrival.icao24}"></span></td>
             </tr>
             <tr>
-                <th title="Unix timestamp (seconds)translated to human readable date format for the last position update. Can be null if no position report was received by OpenSky within the past 15s.">First Seen(Human Readable Date)</th>
+                <th title=" Estimated time of departure for the flight as Unix time (seconds since epoch)">First Seen(Human Readable Date)</th>
                 <td><span th:text="${firstSeenFormatted}"></span></td>
             </tr>
             <tr>
-                <th title="Four letter ICAO airport aircraft departed from">Est. Arrival Airport</th>
+                <th title=" ICAO code of the estimated arrival airport. Can be null if the airport could not be identified">Est. Arrival Airport</th>
                 <td><span th:text="${arrival.estArrivalAirport}"></span></td>
             </tr>
             <tr>
@@ -55,19 +55,19 @@
                 <td><span th:text="${lastSeenFormatted}"></span></td>
             </tr>
             <tr>
-                <th title="Callsign of the vehicle (8 chars). Can be null if no callsign has been received.">Call Sign</th>
+                <th title="Callsign of the vehicle (8 chars). Can be null if no callsign has been received. If the vehicle transmits multiple callsigns during the flight, we take the one seen most frequently.">Call Sign</th>
                 <td><span th:text="${arrival.callSign}"></span></td>
                 </tr>
                 <tr>
-                    <th title="Lateral distance away from the departure airport ">Est. Arrival Airport Horiz. Distance</th>
+                    <th title="Horizontal distance of the last received airborne position to the estimated arrival airport in meters.">Est. Arrival Airport Horiz. Distance</th>
                     <td><span th:text="${arrival.estArrivalAirportHorizDistance}"></span></td>
                 </tr>
                 <tr>
-                    <th title="Vertical distance above the airport"> Est. Arrival Airport Vert. Distance</th>
+                    <th title="Vertical distance of the last received airborne position to the estimated arrival airport in meters."> Est. Arrival Airport Vert. Distance</th>
                     <td><span th:text="${arrival.estArrivalAirportVertDistance}"></span></td>
                 </tr>
                 <tr>
-                    <th title="Departure airport candidates">Arrival Airport Candidates Count</th>
+                    <th title="Number of other arrival departure airports.">Arrival Airport Candidates Count</th>
                     <td><span th:text="${arrival.arrivalAirportCandidatesCount}"></span></td>
                 </tr>
                 </tbody>

@@ -13,8 +13,9 @@ public class Search {
 	private Long id;
 	private String searchType;
 	private String airport;
-	private String startDate;
-	private String endDate;
+	private String startTime;
+	private String endTime;
+	
 	
 	
 	
@@ -37,16 +38,18 @@ public class Search {
 	public void setAirport(String airport) {
 		this.airport = airport;
 	}
-	public String getStartDate() {
-		return startDate;
+	public String getStartTime() {
+		return startTime;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
-	public String getEndDate() {
-		return endDate;
+	public String getEndTime() {
+		return endTime;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
+	
+	
 }

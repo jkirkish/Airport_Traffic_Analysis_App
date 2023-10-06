@@ -50,10 +50,10 @@ public class SearchService {
 
 	public void initiateSearch(Search search) throws Exception {
 		EpochConverter epochConverter = new EpochConverter();
-		Long start = epochConverter.humanReadableToEpoch(search.getStartDate());
+		Long start = epochConverter.humanReadableToEpoch(search.getStartTime());
 		String startDate = start.toString();
 		System.out.println("StartDate is:" + startDate);
-		Long end = epochConverter.humanReadableToEpoch(search.getEndDate());
+		Long end = epochConverter.humanReadableToEpoch(search.getEndTime());
 		String endDate = end.toString();
 		System.out.println("EndDate is:" + endDate);
 
@@ -109,5 +109,10 @@ public class SearchService {
 
 		}
 	}
+	}
+
+	public void deleteAllRequests() {
+		searchRepo.deleteAll();
+		
 	}
 }

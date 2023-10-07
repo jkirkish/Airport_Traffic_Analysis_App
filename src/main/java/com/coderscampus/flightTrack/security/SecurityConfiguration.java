@@ -56,7 +56,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/airportArrivalSearch/**").authenticated()
 					.requestMatchers("/arrival/**").authenticated()
 					.requestMatchers("/arrivals/**").authenticated()
-					.requestMatchers("/arrivalSearchRequests/**").authenticated()
+					.requestMatchers("/arrivalSearchRequests").hasRole("ADMIN")
 					.requestMatchers("/departure/**").authenticated()
 					.requestMatchers("/departures/**").authenticated()
 					.requestMatchers("/editSearch/**").authenticated()

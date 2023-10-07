@@ -102,7 +102,7 @@ public class SearchController {
         } catch (Exception e) {
             // Handle any exceptions
             model.addAttribute("errorMessage", "An error occurred");
-            return "errorPage"; // Return an error view
+            return "404error"; // Return an error view
         }
     }
 

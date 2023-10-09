@@ -64,6 +64,15 @@ fetch('/airportArrivalSearch', {
     .then(response => {
         // Check if the response is successful (status code 200)
         if (response.ok) {
+			if (response.status === 404) {
+                // Redirect to the custom error page
+                window.location.href = "/404error.html";
+                event.preventDefault(); // Prevent the form from submitting
+            }if (response.status === 502) {
+                // Redirect to the custom error page
+                alert("502 error Bad gateway")
+                event.preventDefault(); // Prevent the form from submitting
+            }
             // Parse the response as JSON
             return response.json();
         } else {

@@ -57,7 +57,7 @@ public class SearchService {
 		String endDate = end.toString();
 		System.out.println("EndDate is:" + endDate);
 
-		if (search.getSearchType().equalsIgnoreCase("Arrival")) {
+		if (search.getSearchType().equals("arrival")) {
 			// Here is the API resource for arrivals
 			// https://openskynetwork.github.io/opensky-api/rest.html#arrivals-by-airport
 			RestTemplate rt = new RestTemplate();

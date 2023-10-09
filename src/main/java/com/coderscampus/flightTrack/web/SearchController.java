@@ -60,50 +60,50 @@ public class SearchController {
 		return "redirect:/arrivalSearchRequests";
 	}
 
-//	@PostMapping("/airportArrivalSearch")
-//	public String saveSearch(Search search) throws Exception {
-//		// Set the search type and airport as you were doing
-//		String type = search.getSearchType();
-//
-//		// Save the search object
-//		searchService.save(search);
-//
-//		// Continue with your logic for redirection and search initiation
-//		String url;
-//		if (type.equals("arrival")) {
-//			url = "arrivals";
-//		} else {
-//			url = "departures";
-//		}
-//		searchService.initiateSearch(search);
-//
-//		return "redirect:/" + url;
-//	}
-	
 	@PostMapping("/airportArrivalSearch")
-    public String handleSearchRequest(@RequestBody Search search, Model model) {
-        try {
-            // Set the search type and airport as you were doing
-            String type = search.getSearchType();
+	public String saveSearch(@RequestBody Search search) throws Exception {
+		// Set the search type and airport as you were doing
+		String type = search.getSearchType();
 
-            // Save the search object
-            searchService.save(search);
+		// Save the search object
+		searchService.save(search);
 
-            // Continue with your logic for redirection and search initiation
-            String url;
-            if (type.equals("arrival")) {
-                url = "arrivals";
-            } else {
-                url = "departures";
-            }
-            searchService.initiateSearch(search);
+		// Continue with your logic for redirection and search initiation
+		String url;
+		if (type.equals("arrival")) {
+			url = "arrivals";
+		} else {
+			url = "departures";
+		}
+		searchService.initiateSearch(search);
 
-            return "redirect:/" + url;
-        } catch (Exception e) {
-            // Handle any exceptions
-            model.addAttribute("errorMessage", "An error occurred");
-            return "404error"; // Return an error view
-        }
-    }
+		return "redirect:/" + url;
+	}
+	
+//	@PostMapping("/airportArrivalSearch")
+//    public String handleSearchRequest(@RequestBody Search search, Model model) {
+//        try {
+//            // Set the search type and airport as you were doing
+//            String type = search.getSearchType();
+//
+//            // Save the search object
+//            searchService.save(search);
+//
+//            // Continue with your logic for redirection and search initiation
+//            String url;
+//            if (type.equals("arrival")) {
+//                url = "arrivals";
+//            } else {
+//                url = "departures";
+//            }
+//            searchService.initiateSearch(search);
+//
+//            return "redirect:/" + url;
+//        } catch (Exception e) {
+//            // Handle any exceptions
+//            model.addAttribute("errorMessage", "An error occurred");
+//            return "404error"; // Return an error view
+//        }
+//    }
 
 }

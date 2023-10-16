@@ -52,11 +52,11 @@ public class SecurityConfiguration {
 			request
 
 					.requestMatchers("/api/v1/users/register").permitAll()
-					.requestMatchers("/api/v1/users/adminPage").hasRole("ADMIN")
+					.requestMatchers("/api/v1/users/adminPage/**").authenticated()
 					.requestMatchers("/airportArrivalSearch/**").authenticated()
 					.requestMatchers("/arrival/**").authenticated()
 					.requestMatchers("/arrivals/**").authenticated()
-					.requestMatchers("/arrivalSearchRequests").hasRole("ADMIN")
+					.requestMatchers("/arrivalSearchRequests/**").authenticated()
 					.requestMatchers("/departure/**").authenticated()
 					.requestMatchers("/departures/**").authenticated()
 					.requestMatchers("/editSearch/**").authenticated()
@@ -70,7 +70,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/css/**", "/images/**", "/js/**").permitAll()
 					.requestMatchers("/api/v1/users/logout").authenticated()
 					.requestMatchers("/api/v1/users//user/**").hasAnyRole("ADMIN","USER")
-					.requestMatchers("/api/v1/users/users/**").hasRole("ADMIN");
+					.requestMatchers("/api/v1/users/users/**").authenticated();
 			        
 					
 

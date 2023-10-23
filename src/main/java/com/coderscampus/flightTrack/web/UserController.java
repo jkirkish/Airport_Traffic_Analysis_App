@@ -89,7 +89,7 @@ public class UserController {
 	}
 
 	@GetMapping("/register")
-	public String getTheUser(ModelMap model) {
+	public String getRegisterPage(ModelMap model) {
 		model.put("user", new User(null, null, null, null, null, null, null, null,null));
 		return "register";
 	}

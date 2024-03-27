@@ -1,7 +1,5 @@
 package com.coderscampus.flightTrack.domain;
 
-import java.util.Objects;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,7 +14,7 @@ public class Address {
 
    
 
-    private Integer id;
+    private Integer  id;
 	private User user;
     @Column(name = "address_line_1")
     private String addressLine1;
